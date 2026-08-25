@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://coebnaadnhd85"]
+
+[ext_resource type="Script" uid="uid://dejflo81x04iq" path="res://Scripts/Run_Minigame/tile.gd" id="1_5kk30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
+size = Vector2(32, 34)
+
+[node name="Tile" type="Area2D" unique_id=525173301]
+script = ExtResource("1_5kk30")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1196131497]
+shape = SubResource("RectangleShape2D_det5f")
+
+[node name="Label" type="Label" parent="." unique_id=739380628]
+offset_right = 40.0
+offset_bottom = 23.0
