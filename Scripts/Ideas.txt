@@ -1,0 +1,36 @@
+3 partes del deporte
+
+Ciclismo -> Bicicleta, Energia (Maxima, minima), Velocidad (Maxima, minima), Aceleración 
+Carrera -> Zapatillas, Energia (Maxima, minima), Velocidad (Maxima, minima), Aceleración
+Nado -> PENSAR HERRAMIENTA, Energia (Maxima, minima), Velocidad (Maxima, minima), Aceleración
+
+Días de entrenamiento -> 10 
+Bucle del juego -> Entra en el día -> 2 entrenamientos a elección (con un minijuego de calificación) -> Pasar de día
+DIA 5 -> Carrera de prueba -> DIA 6 -> ELECCION DE EQUIPAMIENTO UNICA (x2 deportes)
+
+Minijuegos de calificación -> A,B,C,D -> 4,3,2,1
+
+MINIJUEGOS: 
+	CICLISMO -> OPCIONES: -> ANALIZAR METRICA DE PUNTAJE
+		A -> Presionar dos botones alternando rapidamente para que el personaje acelere
+		B -> Alternar botones tipo juego de peleas (awds por ej)
+		C -> Juego tipo 3/5 carriles tipo roadfightera
+	CARRERA -> OPCIONES: -> ANALIZAR
+		A -> Juego de ritmo tipo bits and bops rhythm heaven
+		B -> Juego de reflejos 
+	NADO -> OPCIONES: 
+		A -> Seguir un rastro
+
+CARRERA: -> ANALIZAR
+	A -> "Minijuego tipo Undyne - Undertale"
+	B -> Dos botones de nuevo xd
+	C -> Partes de todos los minijuegos
+
+Sistema de puntos x puesto en cada parte
+
+Ver como armar bots xd
+
+Energia -> Estadistica para acelerar x tiempo (x es el numero de segundos/energia)
+Velocidad -> Velocidad maxima a la que puede ir acelerando. La velocidad minima es velocidad base
+Aceleración -> Tiempo en el que tarda en alcanzar velocidad maxima
+Herramienta -> Mejora de una estadistica -> (Basico, +V, +E, +A)
