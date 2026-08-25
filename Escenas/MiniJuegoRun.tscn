@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://do2rax1ajx23t"]
+
+[ext_resource type="Script" uid="uid://bii0xkghklrwn" path="res://Scripts/mini_juego_run.gd" id="1_14oq2"]
+[ext_resource type="Script" uid="uid://dkinbj3g4d567" path="res://Scripts/detector.gd" id="2_sy6tq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
+size = Vector2(49, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
+size = Vector2(35, 32)
+
+[node name="MiniJuegoRun" type="Node2D" unique_id=920342636]
+script = ExtResource("1_14oq2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1339176610]
+offset_right = 1159.0
+offset_bottom = 651.0
+color = Color(0.52906674, 0.5290667, 0.5290667, 1)
+
+[node name="Detector" type="Area2D" parent="." unique_id=1755045963]
+position = Vector2(478, 310)
+script = ExtResource("2_sy6tq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector" unique_id=1636637168]
+shape = SubResource("RectangleShape2D_det5f")
+debug_color = Color(0.68968755, 0.22034335, 0.30765343, 0.41960785)
+
+[node name="Test" type="Area2D" parent="." unique_id=1032737684]
+position = Vector2(660, 310)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Test" unique_id=1170414644]
+position = Vector2(-66, -4)
+shape = SubResource("RectangleShape2D_a62a2")
+
+[connection signal="area_entered" from="Detector" to="." method="_on_area_2d_area_entered"]
