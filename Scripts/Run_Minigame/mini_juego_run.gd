@@ -27,19 +27,23 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		var target_keycode = OS.find_keycode_from_string(current_tile.letra_mostrada)
+		var distancia = detector.global_position.distance_to(current_tile.global_position)
 		
 		if event.keycode == target_keycode:
-			var distancia = detector.global_position.distance_to(current_tile.global_position)
-			
-			if distancia <= 10.0:
+			if distancia <= 25.0:
 				puntaje += 150
-			elif distancia <= 50.0:
+				eliminar_tile(current_tile)
+			elif distancia <= 125.0:
 				puntaje += 75
-			
-			puntaje -= 50
-			eliminar_tile(current_tile)
+				eliminar_tile(current_tile)
+			else:
+				puntaje -= 50
+				eliminar_tile(current_tile)
 		else:
-			puntaje -= 50
+			if distancia <= 125.0:
+				puntaje -= 25
+			else:
+				puntaje -= 50
 			eliminar_tile(current_tile)
 
 func _on_timer_timeout() -> void:
@@ -49,15 +53,18 @@ func _on_timer_timeout() -> void:
 	add_child(new_tile)
 	active_tiles.append(new_tile)
 
+
 func _on_detector_area_exited(area: Area2D) -> void:
-	var tile_exited:Node2D
+	var tile_exited: Node2D
 	
 	if area.get_parent() != self:
 		tile_exited = area.get_parent()
 	else:
 		tile_exited = area
 		
-	eliminar_tile(tile_exited)
+	if tile_exited in active_tiles:
+		puntaje -= 25
+		eliminar_tile(tile_exited)
 
 func eliminar_tile(tile: Node2D) -> void:
 	if tile in active_tiles:
