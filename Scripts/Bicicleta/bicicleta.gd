@@ -5,6 +5,7 @@ var p = 0
 var extra = 0
 var rank: String
 var r_color: Color
+var fade_tween: Tween
 @onready var points_l: Label = $points
 @onready var player: Node2D = $player
 @onready var closecall_text: Label = $closecall_text
@@ -12,6 +13,7 @@ var r_color: Color
 @onready var tiempo_general: Timer = $tiempo_general
 @onready var survive_timer: Timer = $survive_timer
 @onready var rank_t: Label = $rank
+@onready var fuego: TextureRect = $fuego
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,30 +23,16 @@ func _ready() -> void:
 	player.sweet_spot.connect(_on_sweet_spot)
 	player.sour_spot.connect(_on_sour_spot)
 	player.normal_spot.connect(_on_normal_spot)
+	fuego.material.set_shader_parameter("fire_aperture", 3.0)
+	fuego.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	points_l.set_text("puntos: " + str(p))
-	tiempo_l.set_text("tiempo: " + str(int(tiempo_general.time_left)))
+	points_l.set_text("PUNTOS: " + str(p))
+	tiempo_l.set_text("TIEMPO: " + str(int(tiempo_general.time_left)))
 	if (player.stop):
 		survive_timer.stop()
 		tiempo_general.stop()
-	print(extra)
-	match p:
-		_ when p < 2000:
-			rank = "C"
-			r_color = Color.PURPLE
-		_ when p < 3000:
-			rank = "B"
-			r_color = Color.BLUE
-		_ when p < 4000:
-			rank = "A"
-			r_color = Color.GREEN
-		_ when p >= 4000:
-			rank = "S"
-			r_color = Color.GOLD
-	rank_t.set_text(rank)
-	rank_t.label_settings.font_color = r_color
 
 func _on_timer_timeout() -> void:
 	if (!player.stop):
@@ -69,16 +57,43 @@ func _on_player_close_call () -> void:
 	tween.tween_callback(t.queue_free)
 
 func _on_player_death() -> void:
-	pass
+	match p:
+		_ when p < 2000:
+			rank = "C"
+			r_color = Color.PURPLE
+		_ when p < 3000:
+			rank = "B"
+			r_color = Color.BLUE
+		_ when p < 4000:
+			rank = "A"
+			r_color = Color.GREEN
+		_ when p >= 4000:
+			rank = "S"
+			r_color = Color.GOLD
+	rank_t.set_text(rank)
+	rank_t.label_settings.font_color = r_color
 
 func _on_sweet_spot() -> void:
 	extra = 50
+	if fade_tween and fade_tween.is_running():
+		fade_tween.kill()
+	fuego.show()
+	fade_tween = create_tween()
+	fade_tween.tween_property(fuego.material, "shader_parameter/fire_alpha", 1.0, 0)
+	fade_tween.tween_property(fuego.material, "shader_parameter/fire_aperture", 0.22, 1)
+	
 	
 func _on_sour_spot() -> void:
 	extra = -10
 	
 func _on_normal_spot() -> void:
 	extra = 0 
+	if fade_tween and fade_tween.is_running():
+		fade_tween.kill()
+	fade_tween = create_tween()
+	fade_tween.tween_property(fuego.material, "shader_parameter/fire_aperture", 3.0, 1)
+	fade_tween.tween_property(fuego.material, "shader_parameter/fire_alpha", 0, 2)
+
 
 func color_anim(l: Label, c1: Color, c2: Color) -> void:
 	var tween: Tween = create_tween()
@@ -87,6 +102,22 @@ func color_anim(l: Label, c1: Color, c2: Color) -> void:
 
 func _on_tiempo_general_timeout() -> void:
 	player.stop = true
+	match p:
+		_ when p < 2000:
+			rank = "C"
+			r_color = Color.PURPLE
+		_ when p < 3000:
+			rank = "B"
+			r_color = Color.BLUE
+		_ when p < 4000:
+			rank = "A"
+			r_color = Color.GREEN
+		_ when p >= 4000:
+			rank = "S"
+			r_color = Color.GOLD
+	rank_t.set_text(rank)
+	rank_t.label_settings.font_color = r_color
+
 
 func _on_survive_timer_timeout() -> void:
 	p += 25 + extra

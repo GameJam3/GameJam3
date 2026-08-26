@@ -3,15 +3,19 @@
 [ext_resource type="Script" uid="uid://kcwps5do4mt2" path="res://Scripts/Bicicleta/bicicleta.gd" id="1_18o8o"]
 [ext_resource type="PackedScene" uid="uid://dbfivhavre4pd" path="res://Escenas/Bicicleta/player_bicicleta.tscn" id="2_6at3b"]
 [ext_resource type="Shader" uid="uid://cw3ppkov2285d" path="res://Assets/fire.gdshader" id="3_6at3b"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_43orh"]
 [ext_resource type="Texture2D" uid="uid://cc845us12pr1u" path="res://Assets/Bicicleta/bg.png" id="4_dveff"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_18o8o"]
+font = ExtResource("3_43orh")
 font_size = 51
 
 [sub_resource type="LabelSettings" id="LabelSettings_xs4ir"]
+font = ExtResource("3_43orh")
 font_size = 51
 
 [sub_resource type="LabelSettings" id="LabelSettings_l5n52"]
+font = ExtResource("3_43orh")
 font_size = 180
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
@@ -32,10 +36,14 @@ size = Vector2(788, 444)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1k8w"]
 size = Vector2(788, 229)
 
+[sub_resource type="Gradient" id="Gradient_yj7ul"]
+offsets = PackedFloat32Array(0.22666667, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1xurm"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vcmr7"]
 noise = SubResource("FastNoiseLite_1xurm")
+color_ramp = SubResource("Gradient_yj7ul")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o1k8w"]
 shader = ExtResource("3_6at3b")
@@ -44,8 +52,8 @@ shader_parameter/bottom_color = Color(0, 0.7, 1, 1)
 shader_parameter/middle_color = Color(1, 0.5, 0, 1)
 shader_parameter/top_color = Color(1, 0.03, 0.001, 1)
 shader_parameter/fire_alpha = 1.0
-shader_parameter/fire_speed = Vector2(0, 2)
-shader_parameter/fire_aperture = 0.22
+shader_parameter/fire_speed = Vector2(0, 0.935)
+shader_parameter/fire_aperture = 3.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l5n52"]
 
@@ -152,11 +160,23 @@ repeat_times = 3
 position = Vector2(1011, 543)
 texture = ExtResource("4_dveff")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=95905999]
+[node name="fuego" type="TextureRect" parent="." unique_id=95905999]
 material = SubResource("ShaderMaterial_o1k8w")
-offset_left = 1382.0
-offset_right = 1915.0
-offset_bottom = 1075.0
+offset_left = 1380.0
+offset_top = 448.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(267, 135)
+texture = SubResource("PlaceholderTexture2D_l5n52")
+
+[node name="fuego" type="TextureRect" parent="fuego" unique_id=77444830]
+material = SubResource("ShaderMaterial_o1k8w")
+layout_mode = 0
+offset_left = -1380.0
+offset_top = -2.0
+offset_right = -840.0
+offset_bottom = 630.0
+pivot_offset = Vector2(267, 135)
 texture = SubResource("PlaceholderTexture2D_l5n52")
 
 [connection signal="timeout" from="obstacle_timer" to="." method="_on_timer_timeout"]
