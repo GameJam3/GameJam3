@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://duelamvjwic0t"]
+
+[ext_resource type="Script" uid="uid://01oc5nb5l5mp" path="res://Scripts/Bicicleta/obstacle.gd" id="1_at4xo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5n52"]
+size = Vector2(95.25, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
+size = Vector2(95.25, 120.5)
+
+[node name="Node2D" type="Node2D" unique_id=918048774]
+position = Vector2(0, -35.275)
+script = ExtResource("1_at4xo")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1511251875]
+position = Vector2(0, -35.275)
+
+[node name="closecall" type="Area2D" parent="." unique_id=1296806664 groups=["closecall"]]
+position = Vector2(0, -35.275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="closecall" unique_id=175412744]
+position = Vector2(0, -35.275)
+scale = Vector2(1.75, 1.75)
+shape = SubResource("RectangleShape2D_l5n52")
+debug_color = Color(0.91115916, 0.000102229715, 0.72932315, 0.41960785)
+
+[node name="car" type="Area2D" parent="." unique_id=1915087033 groups=["obstacle"]]
+position = Vector2(0, -35.275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="car" unique_id=853292876]
+position = Vector2(0, -35.275)
+shape = SubResource("RectangleShape2D_xs4ir")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
