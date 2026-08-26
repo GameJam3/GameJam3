@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dejflo81x04iq" path="res://Scripts/Run_Minigame/tile.gd" id="1_5kk30"]
 [ext_resource type="Texture2D" uid="uid://dad6uviy2nlec" path="res://Assets/Run/Circle.png" id="2_lj0ly"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_6t7u2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
 size = Vector2(83.5, 82.5)
@@ -19,10 +20,11 @@ scale = Vector2(0.7083334, 0.6916667)
 texture = ExtResource("2_lj0ly")
 
 [node name="Label" type="Label" parent="." unique_id=739380628]
-offset_left = -17.0
-offset_top = -37.0
-offset_right = 49.0
-offset_bottom = 32.0
+offset_left = -21.0
+offset_top = -29.0
+offset_right = 45.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_6t7u2")
 theme_override_font_sizes/font_size = 50
 text = "A"

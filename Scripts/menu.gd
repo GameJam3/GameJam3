@@ -1,16 +1,16 @@
 extends Node2D
 
+@onready var transition: Node2D = $Transition
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$AnimationPlayer.play("Intro")
+
+func _on_play_pressed() -> void:
+	transition.call_deferred("play_anim", "Fade_Out")
+	$Timer.start()
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	position.y += 3
 
-
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	queue_free()
+func _on_timer_timeout() -> void:
+	transition.call_deferred("_on_animation_player_animation_finished", "Fade_Out")

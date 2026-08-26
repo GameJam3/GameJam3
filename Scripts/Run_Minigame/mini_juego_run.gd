@@ -3,6 +3,7 @@ extends Node2D
 @onready var detector: Area2D = $Detector
 @onready var particulas: GPUParticles2D = $GPUParticles2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var transition: Node2D = $Transition
 
 const TILE: PackedScene = preload("uid://coebnaadnhd85")
 
@@ -42,14 +43,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		particulas.restart()
 	
 		if event.keycode == target_keycode:
-			print(distancia)
-			
 			if distancia <= 25.0:
-				print("pro")
 				puntaje += 150
 				eliminar_tile(current_tile)
 			elif distancia <= 125.0:
-				print("meh")
 				puntaje += 75
 				eliminar_tile(current_tile)
 			else:
@@ -86,7 +83,3 @@ func eliminar_tile(tile: Node2D) -> void:
 		active_tiles.erase(tile)
 	if is_instance_valid(tile):
 		tile.queue_free()
-
-
-func _on_timer_2_timeout() -> void:
-	audio_stream_player_2d.pitch_scale = 1.5
