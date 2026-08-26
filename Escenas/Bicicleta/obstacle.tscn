@@ -20,7 +20,7 @@ position = Vector2(0, -35.275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="closecall" unique_id=175412744]
 position = Vector2(0, -35.275)
-scale = Vector2(1.75, 1.75)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_l5n52")
 debug_color = Color(0.91115916, 0.000102229715, 0.72932315, 0.41960785)
 

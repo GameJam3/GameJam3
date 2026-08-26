@@ -12,25 +12,24 @@ signal normal_spot
 func _ready() -> void:
 	pass # Replace with function body.
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	speed.x = accel.x * 0.4
-	speed.y = accel.y * 0.4
+func _physics_process(delta: float) -> void:
+	speed.x = accel.x
+	speed.y = accel.y
 	if (!stop): 
 		if Input.is_key_pressed(KEY_A):
-			accel.x += 0.4
+			accel.x += 0.7
 			position.x -= speed.x
 		if Input.is_key_pressed(KEY_D):
-			accel.x += 0.4
+			accel.x += 0.7
 			position.x += speed.x
 		if Input.is_key_pressed(KEY_S):
-			accel.y += 0.4
+			accel.y += 0.7
 			position.y += speed.y
 		if Input.is_key_pressed(KEY_W):
-			accel.y += 0.4
+			accel.y += 0.7
 			position.y -= speed.y
-	accel.x -= 0.3
-	accel.y -= 0.3
+	accel.x -= 0.5
+	accel.y -= 0.5
 	if (accel.x < 0):
 		accel.x = 0
 	if (accel.y < 0):
