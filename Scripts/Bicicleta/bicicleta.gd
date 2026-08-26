@@ -3,12 +3,15 @@ const ob = preload("uid://duelamvjwic0t")
 var r
 var p = 0
 var extra = 0
+var rank: String
+var r_color: Color
 @onready var points_l: Label = $points
 @onready var player: Node2D = $player
 @onready var closecall_text: Label = $closecall_text
 @onready var tiempo_l: Label = $tiempo
 @onready var tiempo_general: Timer = $tiempo_general
 @onready var survive_timer: Timer = $survive_timer
+@onready var rank_t: Label = $rank
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,7 +28,23 @@ func _process(delta: float) -> void:
 	tiempo_l.set_text("tiempo: " + str(int(tiempo_general.time_left)))
 	if (player.stop):
 		survive_timer.stop()
+		tiempo_general.stop()
 	print(extra)
+	match p:
+		_ when p < 2000:
+			rank = "C"
+			r_color = Color.PURPLE
+		_ when p < 3000:
+			rank = "B"
+			r_color = Color.BLUE
+		_ when p < 4000:
+			rank = "A"
+			r_color = Color.GREEN
+		_ when p >= 4000:
+			rank = "S"
+			r_color = Color.GOLD
+	rank_t.set_text(rank)
+	rank_t.label_settings.font_color = r_color
 
 func _on_timer_timeout() -> void:
 	if (!player.stop):
@@ -53,7 +72,7 @@ func _on_player_death() -> void:
 	pass
 
 func _on_sweet_spot() -> void:
-	extra = 15
+	extra = 50
 	
 func _on_sour_spot() -> void:
 	extra = -10

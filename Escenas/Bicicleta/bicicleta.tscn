@@ -11,54 +11,48 @@ font_size = 51
 [sub_resource type="LabelSettings" id="LabelSettings_xs4ir"]
 font_size = 51
 
+[sub_resource type="LabelSettings" id="LabelSettings_l5n52"]
+font_size = 180
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
-size = Vector2(135, 1082)
+size = Vector2(131, 1061)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dveff"]
-size = Vector2(107.5, 1082)
+size = Vector2(130, 1058)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmr7"]
-size = Vector2(814, 11)
+size = Vector2(835, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xurm"]
-size = Vector2(811, 11)
+size = Vector2(811, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5n52"]
-size = Vector2(788, 425)
+size = Vector2(788, 444)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1k8w"]
-size = Vector2(788, 249.5)
+size = Vector2(788, 229)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2larm"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xurm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnhg0"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vcmr7"]
+noise = SubResource("FastNoiseLite_1xurm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1k8w"]
 shader = ExtResource("3_6at3b")
-shader_parameter/noise_tex = SubResource("NoiseTexture2D_2larm")
-shader_parameter/bottom_color = Color(0.93065083, 0.5491917, 1.540184e-06, 1)
-shader_parameter/middle_color = Color(0.8681865, 0.60074824, 3.85046e-07, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_vcmr7")
+shader_parameter/bottom_color = Color(0, 0.7, 1, 1)
+shader_parameter/middle_color = Color(1, 0.5, 0, 1)
 shader_parameter/top_color = Color(1, 0.03, 0.001, 1)
 shader_parameter/fire_alpha = 1.0
-shader_parameter/fire_speed = Vector2(3.845, 1.42)
-shader_parameter/fire_aperture = 0.4010000190475
+shader_parameter/fire_speed = Vector2(0, 2)
+shader_parameter/fire_aperture = 0.22
 
-[sub_resource type="Gradient" id="Gradient_n7ka3"]
-offsets = PackedFloat32Array(0, 0.021978023, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.22527473, 0.22527473, 0.22527473, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_houxa"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s710y"]
-noise = SubResource("FastNoiseLite_houxa")
-color_ramp = SubResource("Gradient_n7ka3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vxla0"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l5n52"]
 
 [node name="Node2D" type="Node2D" unique_id=16198870]
 script = ExtResource("1_18o8o")
 metadata/_edit_horizontal_guides_ = [-462.0]
-metadata/_edit_vertical_guides_ = [1350.0, 665.0]
+metadata/_edit_vertical_guides_ = [960.0, 665.0]
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=648540808]
 z_index = -2
@@ -67,53 +61,55 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=969410372]
-z_index = -2
-offset_left = 614.0
-offset_right = 1406.0
-offset_bottom = 1077.0
-color = Color(0.18359032, 0.1835905, 0.18359038, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="player" parent="." unique_id=633465506 instance=ExtResource("2_6at3b")]
-position = Vector2(1015, 743)
+position = Vector2(960, 761)
 
 [node name="points" type="Label" parent="." unique_id=1898811310]
-offset_left = 613.0
-offset_top = 6.0
-offset_right = 1405.0
-offset_bottom = 76.0
+offset_left = 562.0
+offset_top = 24.0
+offset_right = 1354.0
+offset_bottom = 94.0
 text = "PLACEHOLDER"
 label_settings = SubResource("LabelSettings_18o8o")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="tiempo" type="Label" parent="." unique_id=1721359445]
-offset_left = 614.0
-offset_top = 75.0
-offset_right = 1405.0
-offset_bottom = 163.0
+offset_left = 563.0
+offset_top = 93.0
+offset_right = 1354.0
+offset_bottom = 181.0
 text = "PLACEHOLDER"
 label_settings = SubResource("LabelSettings_xs4ir")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="rank" type="Label" parent="." unique_id=1448710308]
+offset_left = 678.0
+offset_top = 178.0
+offset_right = 1246.0
+offset_bottom = 435.0
+label_settings = SubResource("LabelSettings_l5n52")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="wall" type="Area2D" parent="." unique_id=1075804496]
+position = Vector2(-51, 18)
 
 [node name="left" type="CollisionShape2D" parent="wall" unique_id=1178520844]
-position = Vector2(655.5, 541)
+position = Vector2(657.5, 530.5)
 shape = SubResource("RectangleShape2D_xs4ir")
 
 [node name="right" type="CollisionShape2D" parent="wall" unique_id=1562109778]
-position = Vector2(1351.75, 543)
+position = Vector2(1363, 531)
 shape = SubResource("RectangleShape2D_dveff")
 
 [node name="down" type="CollisionShape2D" parent="wall" unique_id=822640108]
-position = Vector2(1009, 1076.5)
+position = Vector2(1008.5, 1053)
 shape = SubResource("RectangleShape2D_vcmr7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=986317774]
-position = Vector2(995.5, 6.5)
+position = Vector2(995.5, -12)
 shape = SubResource("RectangleShape2D_1xurm")
 
 [node name="obstacle_timer" type="Timer" parent="." unique_id=1892776169]
@@ -130,35 +126,38 @@ wait_time = 0.5
 autostart = true
 
 [node name="sweet_spot" type="Area2D" parent="." unique_id=651935694 groups=["sweet_spot"]]
+position = Vector2(-51, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sweet_spot" unique_id=446698568]
-position = Vector2(1011, 213.5)
+position = Vector2(1011, 204)
 shape = SubResource("RectangleShape2D_l5n52")
 debug_color = Color(0.53382355, 0.5691286, 0.08519689, 0.41960785)
 
 [node name="sour_spot" type="Area2D" parent="." unique_id=1284973641 groups=["sour_spot"]]
+position = Vector2(-51, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sour_spot" unique_id=816854454]
-position = Vector2(1012, 955.75)
+position = Vector2(1012, 945.5)
 shape = SubResource("RectangleShape2D_o1k8w")
 debug_color = Color(0.23476815, 0.637634, 0, 0.41960785)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=447138459]
-visible = false
-material = SubResource("ShaderMaterial_bnhg0")
-position = Vector2(312, 823)
-texture = SubResource("NoiseTexture2D_s710y")
-process_material = SubResource("ParticleProcessMaterial_vxla0")
-
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=903789582]
 z_index = -1
+scroll_offset = Vector2(-51, -632)
 repeat_size = Vector2(0, 650)
 autoscroll = Vector2(0, 250)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=608788614]
-position = Vector2(1010, 542)
+position = Vector2(1011, 543)
 texture = ExtResource("4_dveff")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=95905999]
+material = SubResource("ShaderMaterial_o1k8w")
+offset_left = 1382.0
+offset_right = 1915.0
+offset_bottom = 1075.0
+texture = SubResource("PlaceholderTexture2D_l5n52")
 
 [connection signal="timeout" from="obstacle_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="tiempo_general" to="." method="_on_tiempo_general_timeout"]
