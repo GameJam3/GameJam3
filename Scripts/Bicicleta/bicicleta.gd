@@ -22,6 +22,8 @@ const anak_font = preload("uid://bcbpgqxrs45xl")
 @onready var drumroll: AudioStreamPlayer = $drumroll
 @onready var ccallsfx: AudioStreamPlayer = $ccallsfx
 @onready var crashsfx: AudioStreamPlayer = $crashsfx
+@onready var play: Button = $Play
+@onready var music: AudioStreamPlayer = $music
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,8 +37,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_P):
-		p = 8000
 	points_l.set_text("PUNTOS: " + str(p))
 	tiempo_l.set_text("TIEMPO: " + str(int(tiempo_general.time_left)))
 	if (player.stop):
@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	if (!player.stop):
-		r = randf_range(726,1200)
+		r = randf_range(706,1214)
 		var obstaculo = ob.instantiate()
 		obstaculo.global_position.x = r
 		obstaculo.z_index = -1
@@ -79,6 +79,7 @@ func _on_player_close_call () -> void:
 	tween.chain().tween_callback(t.queue_free)
 
 func _on_player_death() -> void:
+	music.stop()
 	crashsfx.play()
 	player.dead = true
 	var anim: Animation = player_anim.get_animation("player_death")
@@ -233,3 +234,10 @@ func end_match() -> void:
 	var target_center_x1 := 960.0
 	var target_y1 := 500.0
 	t2.set_position(Vector2(target_center_x1 - (t2.size.x / 2.0), target_y1))
+	await get_tree().create_timer(0.5).timeout
+	play.visible = true
+
+func _on_play_pressed() -> void:
+	transition.z_index = 30
+	transition.call_deferred("play_anim", "Fade_Out")
+	transition.call_deferred("cambio_escena", "res://Escenas/Nadar/Nado.tscn")

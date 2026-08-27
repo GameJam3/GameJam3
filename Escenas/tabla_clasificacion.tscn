@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="3_alqc1"]
 [ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="4_ctuqd"]
 [ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="5_ctuqd"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="7_ctuqd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l5n52"]
 shader = ExtResource("1_bossw")
@@ -44,6 +45,27 @@ font_size = 50
 [sub_resource type="LabelSettings" id="LabelSettings_l5n52"]
 font = ExtResource("4_ctuqd")
 font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctuqd"]
+bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obxus"]
+bg_color = Color(0.57411045, 0.17052966, 0.23894876, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm534"]
+bg_color = Color(0.271908, 0.059776537, 0.09643512, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Control" type="Control" unique_id=397851550]
 layout_mode = 3
@@ -197,3 +219,20 @@ offset_right = 1192.0
 offset_bottom = 1014.0
 label_settings = SubResource("LabelSettings_l5n52")
 horizontal_alignment = 1
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("7_ctuqd")]
+
+[node name="menu" type="Button" parent="." unique_id=409947812]
+layout_mode = 0
+offset_left = 1638.0
+offset_top = 949.0
+offset_right = 1890.0
+offset_bottom = 1046.0
+theme_override_fonts/font = ExtResource("4_ctuqd")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_ctuqd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_obxus")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nm534")
+text = "Volver a Menu"
+
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

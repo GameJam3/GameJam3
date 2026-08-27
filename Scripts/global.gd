@@ -1,12 +1,12 @@
 extends Node
-var p_bici
-var p_run
-var p_nado
-var ranktotal 
+var p_bici = 1
+var p_run = 0
+var p_nado = 0
+var ranktotal = "C"
 var rank_bici: String
 var rank_run: String
 var rank_nado: String
-var p_name: String
+var p_name: String = "john doe"
 func puntajetotal() -> float:
 	return (((p_bici / 2) + (p_run) + (p_nado)) / 3)
 

@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://depxojaf7twgy"]
+
+[ext_resource type="Script" uid="uid://cvioxvg1qv7n1" path="res://nombre.gd" id="1_vkpfo"]
+[ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="2_f0pq6"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_man2d"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="4_f0pq6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs4ir"]
+shader = ExtResource("2_f0pq6")
+shader_parameter/g_random_seed = 0.0
+shader_parameter/g_grid_size = Vector2(16, 9)
+shader_parameter/g_cell_offset = Vector2(0, 0)
+shader_parameter/g_speed = Vector2(0, 0)
+shader_parameter/g_draw_size_min = 0.1
+shader_parameter/g_draw_size_max = 0.4
+shader_parameter/g_color_a = Color(1, 1, 1, 0)
+shader_parameter/g_color_b = Color(0, 0, 0, 1)
+shader_parameter/g_rot_global_speed = 1.0
+shader_parameter/g_rot_min_speed = 0.1
+shader_parameter/g_rot_max_speed = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xs4ir"]
+font = ExtResource("3_man2d")
+font_size = 84
+shadow_size = 29
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(10.105, 8.93)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_danms"]
+bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkwhr"]
+bg_color = Color(0.57411045, 0.17052966, 0.23894876, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu7qi"]
+bg_color = Color(0.271908, 0.059776537, 0.09643512, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="nombre" type="Control" unique_id=1621328791]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vkpfo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1161751031]
+material = SubResource("ShaderMaterial_xs4ir")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1082.0
+
+[node name="Label" type="Label" parent="." unique_id=861455570]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 81.0
+offset_right = 1531.0
+offset_bottom = 432.0
+text = "Completaste el triatlon! 
+introduce tu nombre para 
+ser registrado"
+label_settings = SubResource("LabelSettings_xs4ir")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="." unique_id=366344620]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 619.0
+offset_right = 1502.0
+offset_bottom = 716.0
+theme_override_fonts/font = ExtResource("3_man2d")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_danms")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jkwhr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gu7qi")
+text = "Confirmar"
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1942749432]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 488.0
+offset_right = 1502.0
+offset_bottom = 585.0
+theme_override_fonts/font = ExtResource("3_man2d")
+theme_override_font_sizes/font_size = 68
+placeholder_text = "Introduce tu nombre"
+alignment = 1
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("4_f0pq6")]
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
