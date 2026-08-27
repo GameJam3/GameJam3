@@ -187,7 +187,7 @@ func end_match() -> void:
 			rank_t.label_settings.outline_size = 0
 			rank_t.label_settings.outline_color = Color.BLACK
 			rank_t.material = rainbow_z
-			rankquote = "Como?"
+			rankquote = "...Como?"
 	Global.rank_bici = rank
 	rank_t.label_settings.font_color = r_color
 	await get_tree().create_timer(3).timeout
