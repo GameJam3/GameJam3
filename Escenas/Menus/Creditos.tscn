@@ -1,3 +1,86 @@
 [gd_scene format=3 uid="uid://c28uwhab760k3"]
 
+[ext_resource type="Script" uid="uid://b8p6bph5myqpt" path="res://Scripts/Menus/creditos.gd" id="1_l03m2"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="2_ol584"]
+[ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="3_g3uou"]
+[ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="4_5ek67"]
+[ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="5_3k7ua"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="6_dx0rb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4yby"]
+shader = ExtResource("3_g3uou")
+shader_parameter/g_random_seed = 0.0
+shader_parameter/g_grid_size = Vector2(16, 9)
+shader_parameter/g_cell_offset = Vector2(0, 0)
+shader_parameter/g_speed = Vector2(2.515, 2.03)
+shader_parameter/g_draw_size_min = 0.030000001425
+shader_parameter/g_draw_size_max = 0.400000019
+shader_parameter/g_color_a = Color(1, 1, 1, 0)
+shader_parameter/g_color_b = Color(1, 1, 1, 1)
+shader_parameter/g_rot_global_speed = 1.0
+shader_parameter/g_rot_min_speed = 0.1
+shader_parameter/g_rot_max_speed = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xs4ir"]
+font = ExtResource("6_dx0rb")
+font_size = 90
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichj5"]
+bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lofbw"]
+bg_color = Color(0.57411045, 0.17052966, 0.23894876, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luj0w"]
+bg_color = Color(0.271908, 0.059776537, 0.09643512, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Creditos" type="Node2D" unique_id=232502252]
+script = ExtResource("1_l03m2")
+metadata/_edit_vertical_guides_ = [960.0]
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("2_ol584")]
+z_index = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1509704830]
+z_index = -2
+material = SubResource("ShaderMaterial_o4yby")
+position = Vector2(960, 540.5)
+scale = Vector2(8, 4.2480316)
+texture = ExtResource("4_5ek67")
+
+[node name="Label" type="Label" parent="." unique_id=982438148]
+material = ExtResource("5_3k7ua")
+offset_left = 170.0
+offset_top = 306.0
+offset_right = 1754.0
+offset_bottom = 636.0
+text = "Musica y efectos: Agus Vidolini
+Programacion: Juani Cargnel y zhiko
+Arte: Jano Paglia"
+label_settings = SubResource("LabelSettings_xs4ir")
+
+[node name="menu" type="Button" parent="." unique_id=810301876]
+offset_left = 1638.0
+offset_top = 949.0
+offset_right = 1890.0
+offset_bottom = 1046.0
+theme_override_fonts/font = ExtResource("6_dx0rb")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_ichj5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lofbw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_luj0w")
+text = "Volver a Menu"
+
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

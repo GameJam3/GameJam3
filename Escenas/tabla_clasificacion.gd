@@ -3,6 +3,7 @@ extends Control
 @onready var listarun: Label = $listarun
 @onready var listatotal: Label = $listatotal
 @onready var listanado: Label = $listanado
+@onready var transition: Node2D = $Transition
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,7 +12,7 @@ func _ready() -> void:
 	load_text_file("res://Assets/runrank.txt", listarun)
 	load_text_file("res://Assets/nadorank.txt", listanado)
 	load_text_file("res://Assets/totalrank.txt", listatotal)
-
+	transition.call_deferred("play_anim", "Fade_In")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -83,3 +84,8 @@ func _guardar_txt_ordenado(s: String, registros: Array[Dictionary]) -> void:
 			# Se guarda con formato "Nombre - Puntaje"
 			file.store_line("%s - %d" % [reg["nombre"], reg["puntaje"]])
 		file.close()
+
+
+func _on_menu_pressed() -> void:
+	transition.call_deferred("play_anim", "Fade_Out")
+	transition.call_deferred("cambio_escena", "res://Escenas/Menus/Menu.tscn")
