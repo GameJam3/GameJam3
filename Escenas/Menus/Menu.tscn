@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://48jawschjc1"]
+
+[ext_resource type="Script" uid="uid://cvjg3fwy6wdls" path="res://Scripts/Menus/menu.gd" id="1_xe2ru"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="2_xelx8"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="2_xhjix"]
+[ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="4_58kv0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8j806"]
+bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_734vi"]
+bg_color = Color(0.57411045, 0.17052966, 0.23894876, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ludhm"]
+bg_color = Color(0.271908, 0.059776537, 0.09643512, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Animation" id="Animation_xhjix"]
+resource_name = "Intro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o2l53"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_425bc"]
+_data = {
+&"Intro": SubResource("Animation_xhjix"),
+&"RESET": SubResource("Animation_o2l53")
+}
+
+[node name="Menu" type="Node2D" unique_id=1003166106]
+script = ExtResource("1_xe2ru")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1024576611]
+z_index = -10
+offset_left = -85.0
+offset_top = -34.0
+offset_right = 1994.0
+offset_bottom = 1104.0
+mouse_behavior_recursive = 1
+color = Color(0.7372549, 1, 0.6156863, 1)
+
+[node name="Play" type="Button" parent="." unique_id=1683395730]
+offset_left = 871.0
+offset_top = 431.0
+offset_right = 1071.0
+offset_bottom = 501.0
+theme_override_fonts/font = ExtResource("2_xelx8")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_8j806")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_734vi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ludhm")
+text = "Play"
+
+[node name="Puntajes" type="Button" parent="." unique_id=169615472]
+offset_left = 1719.0
+offset_top = 999.0
+offset_right = 1897.0
+offset_bottom = 1056.0
+theme_override_fonts/font = ExtResource("2_xelx8")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_8j806")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_734vi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ludhm")
+text = "Puntajes"
+
+[node name="Credits" type="Button" parent="." unique_id=1133958760]
+offset_left = 871.0
+offset_top = 513.0
+offset_right = 1071.0
+offset_bottom = 583.0
+theme_override_fonts/font = ExtResource("2_xelx8")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_8j806")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_734vi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ludhm")
+text = "Credits"
+
+[node name="Exit" type="Button" parent="." unique_id=1836137324]
+offset_left = 871.0
+offset_top = 596.0
+offset_right = 1071.0
+offset_bottom = 666.0
+theme_override_fonts/font = ExtResource("2_xelx8")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_8j806")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_734vi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ludhm")
+text = "Exit"
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("2_xhjix")]
+
+[node name="Label" type="Label" parent="." unique_id=943839802]
+z_index = -2
+material = ExtResource("4_58kv0")
+offset_left = 273.0
+offset_top = 92.0
+offset_right = 1850.0
+offset_bottom = 378.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 0.16078432)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 200
+text = "STICKATHLON"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=176556781]
+libraries/ = SubResource("AnimationLibrary_425bc")
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Puntajes" to="." method="_on_puntajes_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

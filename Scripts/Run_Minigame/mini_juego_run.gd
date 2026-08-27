@@ -266,6 +266,8 @@ func _on_pitchscale_timeout() -> void:
 
 func rank_calc() -> void:
 	rank_l.z_index = 21
+	$Button.show()
+	$Button.z_index = 21
 	var r_color: Color
 	rank_l.label_settings.outline_size = 15
 	rank_l.label_settings.outline_color = Color.WHITE
@@ -289,3 +291,7 @@ func rank_calc() -> void:
 			rank_l.label_settings.outline_color = Color.BLACK
 	rank_l.set_text(rank)
 	rank_l.label_settings.font_color = r_color
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Escenas/Bicicleta/bicicleta.tscn")

@@ -1,15 +1,66 @@
 [gd_scene format=3 uid="uid://dd5ffu51o22iu"]
 
+[ext_resource type="Script" uid="uid://uuiu13s4t5bj" path="res://Scripts/Nado/moneda.gd" id="1_yi887"]
+[ext_resource type="Texture2D" uid="uid://b4ds54caainkg" path="res://Assets/Nado/ola1.png" id="2_dmjnw"]
+[ext_resource type="Shader" uid="uid://883lgu02sy3s" path="res://Assets/Run/MiniJuegoRun.gdshader" id="2_ndxdw"]
+[ext_resource type="Texture2D" uid="uid://bjm174somv5as" path="res://Assets/Nado/ola2.png" id="3_ndxdw"]
+[ext_resource type="Texture2D" uid="uid://dxr137enpu7ey" path="res://Assets/Nado/ola3.png" id="4_sn7fj"]
+[ext_resource type="Texture2D" uid="uid://d2j0jrvldp145" path="res://Assets/Nado/ola4.png" id="5_h67jw"]
+[ext_resource type="Texture2D" uid="uid://dxrspy2kwgoyy" path="res://Assets/Nado/ola5.png" id="6_j4vnq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sn7fj"]
+shader = ExtResource("2_ndxdw")
+shader_parameter/glow_color = Color(0, 0, 0, 1)
+shader_parameter/glow_thickness = 0.0
+shader_parameter/intensity = 0.9890000469775
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dmjnw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ndxdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sn7fj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h67jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4vnq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
+size = Vector2(18, 18)
 
 [node name="Moneda" type="Node2D" unique_id=1028184537]
+scale = Vector2(3, 3)
+script = ExtResource("1_yi887")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=757527800]
+texture_filter = 1
+material = SubResource("ShaderMaterial_sn7fj")
+position = Vector2(1.3333333, 0.3333333)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_det5f")
+autoplay = "default"
+frame_progress = 0.36354768
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1619216471]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=301641735]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_a62a2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=604399778]
+rect = Rect2(-10, -10, 22, 20)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
