@@ -192,7 +192,7 @@ func end_match() -> void:
 	rank_t.label_settings.font_color = r_color
 	await get_tree().create_timer(3).timeout
 	rank_t.set_text(rank)
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(1).timeout
 	var t2 : Label = Label.new()
 	var s2 := LabelSettings.new()
 
@@ -218,5 +218,5 @@ func end_match() -> void:
 
 	# 4. Ajusta la posición X restando la mitad del ancho del Label
 	var target_center_x1 := 960.0
-	var target_y1 := 165.0
+	var target_y1 := 500.0
 	t2.set_position(Vector2(target_center_x1 - (t2.size.x / 2.0), target_y1))
