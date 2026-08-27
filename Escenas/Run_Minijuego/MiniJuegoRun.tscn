@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bii0xkghklrwn" path="res://Scripts/Run_Minigame/mini_juego_run.gd" id="1_0gpwp"]
 [ext_resource type="Script" uid="uid://dkinbj3g4d567" path="res://Scripts/Run_Minigame/detector.gd" id="2_xevjx"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_7gq8g"]
 [ext_resource type="Texture2D" uid="uid://rgiedtc2gv6t" path="res://Assets/Run/Parallax_Run/game_background_2/game_background_2.png" id="3_xevjx"]
 [ext_resource type="Texture2D" uid="uid://dad6uviy2nlec" path="res://Assets/Run/Circle.png" id="4_hy10v"]
-[ext_resource type="AudioStream" uid="uid://dp6jiph8op4qo" path="res://Assets/Run/gameplay 1.ogg" id="5_wdlwq"]
+[ext_resource type="AudioStream" uid="uid://1jfirfoxrsa6" path="res://Assets/Run/gameplay 2.ogg" id="6_2gvvb"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Transition.tscn" id="7_xwoob"]
+[ext_resource type="Shader" uid="uid://883lgu02sy3s" path="res://Assets/Run/MiniJuegoRun.gdshader" id="8_2gvvb"]
+[ext_resource type="Texture2D" uid="uid://bifaybt5tkp1b" path="res://Assets/Run/Run0.png" id="8_i7bp8"]
+[ext_resource type="Texture2D" uid="uid://clrcqnrcnkhbo" path="res://Assets/Run/Run1.png" id="9_2gvvb"]
+[ext_resource type="Texture2D" uid="uid://blnwqgvbiw0fc" path="res://Assets/Run/Run2.png" id="10_3vjrd"]
+[ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="12_3vjrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
 size = Vector2(100, 100)
@@ -43,6 +50,223 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 anim_speed_curve = SubResource("CurveTexture_6t7u2")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_det5f"]
+shader = ExtResource("8_2gvvb")
+shader_parameter/glow_color = Color(0, 0.64844733, 1.92523e-07, 1)
+shader_parameter/glow_thickness = 1.538000073055
+shader_parameter/intensity = 0.7690000365275
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2gvvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_i7bp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2gvvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3vjrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2gvvb")
+}],
+"loop": 1,
+"name": &"Run",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gvvb"]
+shader = ExtResource("8_2gvvb")
+shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.50000002375
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_i7bp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2gvvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3vjrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2gvvb")
+}],
+"loop": 1,
+"name": &"Run",
+"speed": 8.0
+}]
+
+[sub_resource type="Shader" id="Shader_3vjrd"]
+code = "shader_type canvas_item;
+
+uniform vec4 glow_color : source_color = vec4(0.0, 1.0, 0.5, 1.0); // Color base del resplandor
+uniform float glow_thickness : hint_range(0.0, 20.0) = 3.0; // Grosor del efecto
+uniform float intensity : hint_range(0.0, 10.0) = 1.5; // Multiplicador para el WorldEnvironment (HDR)
+
+void fragment() {
+    // Tamaño del píxel de la textura original
+    vec2 size = TEXTURE_PIXEL_SIZE * glow_thickness;
+    vec4 base_color = texture(TEXTURE, UV);
+    float alpha = 0.0;
+
+    // Muestreo octagonal (8 direcciones) para suavizar los bordes del resplandor
+    alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+
+    // Limitamos el alfa para evitar excesos en las esquinas interiores
+    alpha = min(alpha, 1.0);
+
+    // Aplicamos la intensidad para forzar los valores por encima de 1.0 (necesario para HDR)
+    vec4 final_glow = glow_color * intensity;
+    final_glow.a = alpha * glow_color.a;
+
+    // Mezclamos el sprite original por encima del resplandor
+    COLOR = mix(final_glow, base_color, base_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3shya"]
+shader = SubResource("Shader_3vjrd")
+shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.50000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqhjf"]
+shader = ExtResource("8_2gvvb")
+shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.50000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uexv2"]
+shader = ExtResource("8_2gvvb")
+shader_parameter/glow_color = Color(0.98713666, 0, 0.23377377, 1)
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.50000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c72j"]
+shader = ExtResource("8_2gvvb")
+shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.50000002375
+
+[sub_resource type="Animation" id="Animation_2gvvb"]
+resource_name = "Bad"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Extras/Extra_Importante:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(900, 690), Vector2(1300, 720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 615), Vector2(800, 640)]
+}
+
+[sub_resource type="Animation" id="Animation_eqhjf"]
+resource_name = "Final"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 615), Vector2(2100, 615)]
+}
+
+[sub_resource type="Animation" id="Animation_3vjrd"]
+resource_name = "Good"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Extras/Extra_Importante:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 720), Vector2(900, 690)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(800, 640), Vector2(1300, 615)]
+}
+
+[sub_resource type="Animation" id="Animation_3shya"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1310, 617)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Extras/Extra_Importante:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(918, 693)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqhjf"]
+_data = {
+&"Bad": SubResource("Animation_2gvvb"),
+&"Final": SubResource("Animation_eqhjf"),
+&"Good": SubResource("Animation_3vjrd"),
+&"RESET": SubResource("Animation_3shya")
+}
+
 [node name="MiniJuegoRun" type="Node2D" unique_id=920342636]
 script = ExtResource("1_0gpwp")
 
@@ -63,11 +287,12 @@ position = Vector2(1811, 975)
 
 [node name="Puntaje" type="Label" parent="." unique_id=320936260]
 z_index = 1
-offset_left = 21.0
-offset_top = 1.0
-offset_right = 67.0
-offset_bottom = 111.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 62.0
+offset_bottom = 126.0
 scale = Vector2(1.0028192, 1)
+theme_override_fonts/font = ExtResource("3_7gq8g")
 theme_override_font_sizes/font_size = 80
 text = "0"
 
@@ -101,12 +326,147 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_xwoob")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=337052765]
-stream = ExtResource("5_wdlwq")
+stream = ExtResource("6_2gvvb")
 
-[node name="Timer2" type="Timer" parent="." unique_id=1743205106]
-wait_time = 10.0
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("7_xwoob")]
+
+[node name="Circle2" type="Sprite2D" parent="." unique_id=1961397241]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(101, 976)
+scale = Vector2(1.025, 1.05)
+texture = ExtResource("4_hy10v")
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=2020930807]
+texture_filter = 1
+position = Vector2(101, 976)
+texture = ExtResource("4_hy10v")
+
+[node name="Player" type="AnimatedSprite2D" parent="." unique_id=1996395198]
+modulate = Color(0, 0.29803923, 0.3529412, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_det5f")
+position = Vector2(1310, 617)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_2gvvb")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="Circle3" type="Sprite2D" parent="Player" unique_id=1358337499]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="Extras" type="Node" parent="." unique_id=2130371029]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Extras" unique_id=105222575]
+modulate = Color(0, 0.29930606, 0.35318637, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_2gvvb")
+position = Vector2(172, 564)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="Circle3" type="Sprite2D" parent="Extras/AnimatedSprite2D2" unique_id=1862699264]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Extras" unique_id=614307477]
+modulate = Color(0, 0.29930606, 0.35318637, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_3shya")
+position = Vector2(213, 711)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="Circle3" type="Sprite2D" parent="Extras/AnimatedSprite2D3" unique_id=212416943]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Extras" unique_id=161766951]
+modulate = Color(0, 0.29930606, 0.35318637, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_eqhjf")
+position = Vector2(530, 566)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="Circle3" type="Sprite2D" parent="Extras/AnimatedSprite2D4" unique_id=435378858]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="Extra_Importante" type="AnimatedSprite2D" parent="Extras" unique_id=1325959716]
+modulate = Color(0, 0.29930606, 0.35318637, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_uexv2")
+position = Vector2(918, 693)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"Run"
+autoplay = "Run"
+frame_progress = 0.37444276
+
+[node name="Circle3" type="Sprite2D" parent="Extras/Extra_Importante" unique_id=121970156]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="Extras" unique_id=201153213]
+modulate = Color(0, 0.29930606, 0.35318637, 1)
+z_index = 2
+material = SubResource("ShaderMaterial_4c72j")
+position = Vector2(477, 754)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"Run"
+autoplay = "Run"
+
+[node name="Circle3" type="Sprite2D" parent="Extras/AnimatedSprite2D6" unique_id=50753891]
+modulate = Color(0, 0, 0, 0.44705883)
+z_index = -1
+position = Vector2(-6.6666727, 83.99999)
+scale = Vector2(1.0067008, 0.54940593)
+skew = -0.87266463
+texture = ExtResource("4_hy10v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2034031230]
+libraries/ = SubResource("AnimationLibrary_eqhjf")
+
+[node name="pitchscale" type="Timer" parent="." unique_id=1003830479]
+wait_time = 15.0
 autostart = true
+
+[node name="SFX" type="Node" parent="." unique_id=1002008314]
+
+[node name="Good" type="AudioStreamPlayer2D" parent="SFX" unique_id=474846643]
+stream = ExtResource("12_3vjrd")
+volume_db = -5.0
 
 [connection signal="area_exited" from="Detector" to="." method="_on_detector_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="timeout" from="pitchscale" to="." method="_on_pitchscale_timeout"]
