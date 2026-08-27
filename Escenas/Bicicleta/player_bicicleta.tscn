@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dbfivhavre4pd"]
 
 [ext_resource type="Script" uid="uid://dvuxdg5mlna32" path="res://Scripts/Bicicleta/player_bicicleta.gd" id="1_lnkfp"]
+[ext_resource type="Material" uid="uid://p8wovjkj8dbj" path="res://Assets/Bicicleta/outline.tres" id="2_26dpd"]
 [ext_resource type="Texture2D" uid="uid://bqvdrm02w3q7l" path="res://Assets/Bicicleta/bike1.png" id="2_yy50k"]
+[ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="3_005y2"]
 [ext_resource type="Texture2D" uid="uid://c1v4pumcau3pn" path="res://Assets/Bicicleta/bike2.png" id="3_26dpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
@@ -9,6 +11,14 @@ size = Vector2(86.46875, 117.390625)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o1k8w"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_005y2")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_yy50k")
@@ -31,11 +41,12 @@ scale = Vector2(0.585, 1)
 shape = SubResource("RectangleShape2D_xs4ir")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1264184700]
-position = Vector2(7, -16)
+material = ExtResource("2_26dpd")
+position = Vector2(-4.7683716e-07, 0)
 scale = Vector2(0.69166666, 0.72047246)
 sprite_frames = SubResource("SpriteFrames_o1k8w")
+animation = &"death"
 autoplay = "default"
-frame_progress = 0.15348315
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
