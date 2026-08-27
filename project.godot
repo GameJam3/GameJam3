@@ -18,6 +18,10 @@ config/name="ProyectoJam3"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://wdy45v17j2bn"
+
 [display]
 
 window/size/viewport_width=1920
