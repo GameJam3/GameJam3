@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://p8wovjkj8dbj"]
+
+[ext_resource type="Shader" uid="uid://883lgu02sy3s" path="res://Assets/Run/MiniJuegoRun.gdshader" id="1_kaioh"]
+
+[resource]
+shader = ExtResource("1_kaioh")
+shader_parameter/glow_color = Color(0, 0.64705884, 0, 1)
+shader_parameter/glow_thickness = 2.000000095
+shader_parameter/intensity = 1.5
