@@ -136,4 +136,4 @@ func _on_timer_timeout() -> void:
 func _on_button_pressed() -> void:
 	transition.z_index = 25
 	transition.call_deferred("play_anim", "Fade_Out")
-	transition.call_deferred("cambio_escena", "res://Escenas/tabla_clasificacion.tscn")
+	transition.call_deferred("cambio_escena", "res://Escenas/Menus/nombre.tscn")

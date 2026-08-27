@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://jqdwqivhted1" path="res://Scripts/Nado/personaje.gd" id="14_yiebs"]
 [ext_resource type="PackedScene" uid="uid://dd5ffu51o22iu" path="res://Escenas/Nadar/Moneda.tscn" id="16_7w53l"]
 [ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="17_h1v84"]
-[ext_resource type="PackedScene" uid="uid://d31gwjnp2nn6t" path="res://Escenas/Menus/Transition.tscn" id="18_udiur"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="18_udiur"]
 [ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="19_muglk"]
 [ext_resource type="AudioStream" uid="uid://ci54kvg6wbj6m" path="res://Assets/drumroll.mp3" id="20_whp32"]
 [ext_resource type="AudioStream" uid="uid://xgwrj0xbievq" path="res://Assets/Run/gameplay 3.ogg" id="21_whp32"]
@@ -724,7 +724,7 @@ autostart = true
 
 [node name="Button" type="Button" parent="." unique_id=1437739330]
 visible = false
-z_index = 25
+z_index = 24
 offset_left = 878.0
 offset_top = 596.0
 offset_right = 1078.0
