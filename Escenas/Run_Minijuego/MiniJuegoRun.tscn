@@ -59,8 +59,8 @@ anim_speed_curve = SubResource("CurveTexture_6t7u2")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_det5f"]
 shader = ExtResource("8_2gvvb")
 shader_parameter/glow_color = Color(0, 0.64844733, 1.92523e-07, 1)
-shader_parameter/glow_thickness = 1.538000073055
-shader_parameter/intensity = 0.7690000365275
+shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/intensity = 0.70000003325
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2gvvb"]
 animations = [{
@@ -520,7 +520,6 @@ position = Vector2(101, 976)
 texture = ExtResource("4_hy10v")
 
 [node name="Player" type="AnimatedSprite2D" parent="." unique_id=1996395198]
-modulate = Color(0, 0.29803923, 0.3529412, 1)
 z_index = 2
 material = SubResource("ShaderMaterial_det5f")
 position = Vector2(1310, 617)

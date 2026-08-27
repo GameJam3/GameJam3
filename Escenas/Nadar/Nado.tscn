@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cy5mmi8wt8ssv" path="res://Assets/Nado/2.png" id="2_syafe"]
 [ext_resource type="Texture2D" uid="uid://c8png3dlcfnjd" path="res://Assets/Nado/Buceo0.png" id="4_p3xav"]
 [ext_resource type="Texture2D" uid="uid://uvh0k1yf03j1" path="res://Assets/Nado/Buceo1.png" id="5_7w53l"]
+[ext_resource type="Shader" uid="uid://883lgu02sy3s" path="res://Assets/Run/MiniJuegoRun.gdshader" id="5_p3xav"]
 [ext_resource type="Texture2D" uid="uid://b77gj5tnphu5v" path="res://Assets/Nado/Buceo2.png" id="6_h1v84"]
 [ext_resource type="Texture2D" uid="uid://omklh2aw5eyf" path="res://Assets/Nado/Buceo3.png" id="7_udiur"]
 [ext_resource type="Texture2D" uid="uid://ch0ecph56hiyr" path="res://Assets/Nado/Nado0.png" id="8_sawib"]
@@ -14,6 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://06kc4brdmy2u" path="res://Assets/Nado/Nado4.png" id="12_rj7yp"]
 [ext_resource type="Texture2D" uid="uid://dadike0s3oo4t" path="res://Assets/Nado/Nado5.png" id="13_ucvxt"]
 [ext_resource type="Script" uid="uid://jqdwqivhted1" path="res://Scripts/Nado/personaje.gd" id="14_yiebs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
+size = Vector2(149, 39)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7w53l"]
+shader = ExtResource("5_p3xav")
+shader_parameter/glow_color = Color(0, 0.64705884, 0, 1)
+shader_parameter/glow_thickness = 3.0000001425
+shader_parameter/intensity = 0.70000003325
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
 animations = [{
@@ -58,9 +68,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
-size = Vector2(149, 39)
-
 [node name="Nado" type="Node2D" unique_id=1258112035]
 script = ExtResource("1_wnw63")
 
@@ -80,15 +87,18 @@ position = Vector2(1902, 404)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_syafe")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=888828913]
-position = Vector2(159, 136)
-sprite_frames = SubResource("SpriteFrames_det5f")
-animation = &"buceo"
-frame_progress = 0.9904872
-
 [node name="Personaje" type="Area2D" parent="." unique_id=563626331]
+position = Vector2(90, 47)
 script = ExtResource("14_yiebs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Personaje" unique_id=1100684633]
 position = Vector2(147, 156)
 shape = SubResource("RectangleShape2D_a62a2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Personaje" unique_id=888828913]
+material = SubResource("ShaderMaterial_7w53l")
+position = Vector2(159, 136)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"buceo"
+autoplay = "buceo"
+frame_progress = 0.9904872

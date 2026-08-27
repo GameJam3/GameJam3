@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dd5ffu51o22iu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
+
+[node name="Moneda" type="Node2D" unique_id=1028184537]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=757527800]
+sprite_frames = SubResource("SpriteFrames_det5f")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1619216471]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=301641735]
+shape = SubResource("RectangleShape2D_a62a2")
