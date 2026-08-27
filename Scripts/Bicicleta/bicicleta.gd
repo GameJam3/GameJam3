@@ -18,6 +18,10 @@ const anak_font = preload("uid://bcbpgqxrs45xl")
 @onready var rainbow_border: ColorRect = $rainbow_border
 @onready var transition: Node2D = $Transition
 @onready var player_anim: AnimationPlayer = $player_anim
+@onready var ranksfx: AudioStreamPlayer = $ranksfx
+@onready var drumroll: AudioStreamPlayer = $drumroll
+@onready var ccallsfx: AudioStreamPlayer = $ccallsfx
+@onready var crashsfx: AudioStreamPlayer = $crashsfx
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +54,7 @@ func _on_timer_timeout() -> void:
 		o_timer.start(t)
 
 func _on_player_close_call () -> void:
+	ccallsfx.play()
 	p += 100
 	color_anim(points_l,Color.GREEN,Color.WHITE)
 	var t : Label = Label.new()
@@ -74,6 +79,8 @@ func _on_player_close_call () -> void:
 	tween.chain().tween_callback(t.queue_free)
 
 func _on_player_death() -> void:
+	crashsfx.play()
+	player.dead = true
 	var anim: Animation = player_anim.get_animation("player_death")
 	var track_idx = anim.find_track("player:position", Animation.TYPE_VALUE)
 	var r1 = randi_range(-150,150)
@@ -82,6 +89,7 @@ func _on_player_death() -> void:
 		anim.track_set_key_value(track_idx,0,player.position)
 		anim.track_set_key_value(track_idx,1,player.position - Vector2(r1,r2))
 	player_anim.play("player_death")
+	await get_tree().create_timer(0.5).timeout
 	end_match()
 
 func _on_sweet_spot() -> void:
@@ -110,6 +118,16 @@ func color_anim(l: Label, c1: Color, c2: Color) -> void:
 
 func _on_tiempo_general_timeout() -> void:
 	player.stop = true
+	if (!player.dead):
+		var anim: Animation = player_anim.get_animation("player_win")
+		var track_idx = anim.find_track("player:position", Animation.TYPE_VALUE)
+		if track_idx != -1:
+			anim.track_set_key_value(track_idx,0,player.position)
+			anim.track_set_key_value(track_idx,1,player.position + Vector2(0,50))
+			anim.track_set_key_value(track_idx,2,player.position + Vector2(0,50))
+			anim.track_set_key_value(track_idx,3,player.position + Vector2(0,-2000))
+		player_anim.play("player_win")
+	await get_tree().create_timer(2).timeout
 	end_match()
 
 
@@ -118,28 +136,100 @@ func _on_survive_timer_timeout() -> void:
 	p += 25 + extra
 
 func end_match() -> void:
+	var rankquote: String
+	Global.p_bici = p
+	transition.call_deferred("play_anim", "Fade_Out_Puntaje")
+	await get_tree().create_timer(1.5).timeout
+	var t1 : Label = Label.new()
+	var s1 := LabelSettings.new()
+
+	# 1. Configura el texto y tamaño de fuente PRIMERO
+	s1.outline_size = 5
+	s1.outline_color = Color.DIM_GRAY
+	s1.font_size = 51
+	t1.label_settings = s1
+	drumroll.play()
+	t1.add_theme_font_override("font", anak_font)
+	t1.set_text("Tu calificacion es...")
+	t1.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t1.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	t1.z_index = 21
+
+	add_child(t1)
+
+	# 2. Recalcula el tamaño del Label con la nueva fuente/texto
+	t1.reset_size()
+
+	# 3. Asigna el pivot exacto
+	t1.pivot_offset = Vector2(t1.size.x / 2.0, t1.size.y)
+
+	# 4. Ajusta la posición X restando la mitad del ancho del Label
+	var target_center_x := 960.0
+	var target_y := 165.0
+	t1.set_position(Vector2(target_center_x - (t1.size.x / 2.0), target_y))
 	var r_color: Color
 	rank_t.label_settings.outline_size = 15
 	rank_t.label_settings.outline_color = Color.WHITE
 	match p:
-		_ when p < 2000:
+		_ when p < 4000:
 			rank = "C"
 			r_color = Color.PURPLE
-		_ when p < 3000:
+			rankquote = "Falta sopa"
+			ranksfx.stream = load("res://Assets/Run/bad.ogg")
+		_ when p < 6000:
 			rank = "B"
 			r_color = Color.BLUE
-		_ when p < 4000:
+			rankquote = "Podia ser mejor..."
+			ranksfx.stream = load("res://Assets/Run/meh.ogg")
+		_ when p < 8000:
 			rank = "A"
 			r_color = Color.GREEN
-		_ when p >= 4000 and p < 8000:
+			rankquote = "Muy bueno! Podria ser aun mejor..."
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
+		_ when p >= 8000 and p < 16000:
 			rank = "S"
 			r_color = Color.GOLD
-		_ when p >= 8000:
+			rankquote = "Excelente!"
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
+		_ when p >= 16000:
 			rank = "Z"
 			r_color = Color.RED
 			rank_t.label_settings.outline_size = 0
 			rank_t.label_settings.outline_color = Color.BLACK
 			rank_t.material = rainbow_z
-	rank_t.set_text(rank)
+			rankquote = "...Como?"
+			ranksfx.stream = load("res://Assets/angel.mp3")
+			ranksfx.volume_db = -10
+	Global.rank_bici = rank
 	rank_t.label_settings.font_color = r_color
-	transition.call_deferred("play_anim", "Fade_Out")
+	await get_tree().create_timer(3).timeout
+	rank_t.set_text(rank)
+	ranksfx.play()
+	await get_tree().create_timer(1).timeout
+	var t2 : Label = Label.new()
+	var s2 := LabelSettings.new()
+
+	# 1. Configura el texto y tamaño de fuente PRIMERO
+	s2.outline_size = 5
+	s2.outline_color = Color.DIM_GRAY
+	s2.font_size = 51
+	t2.label_settings = s2
+
+	t2.add_theme_font_override("font", anak_font)
+	t2.set_text(rankquote)
+	t2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t2.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	t2.z_index = 21
+
+	add_child(t2)
+
+	# 2. Recalcula el tamaño del Label con la nueva fuente/texto
+	t2.reset_size()
+
+	# 3. Asigna el pivot exacto
+	t2.pivot_offset = Vector2(t2.size.x / 2.0, t2.size.y)
+
+	# 4. Ajusta la posición X restando la mitad del ancho del Label
+	var target_center_x1 := 960.0
+	var target_y1 := 500.0
+	t2.set_position(Vector2(target_center_x1 - (t2.size.x / 2.0), target_y1))
