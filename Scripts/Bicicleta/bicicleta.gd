@@ -18,6 +18,10 @@ const anak_font = preload("uid://bcbpgqxrs45xl")
 @onready var rainbow_border: ColorRect = $rainbow_border
 @onready var transition: Node2D = $Transition
 @onready var player_anim: AnimationPlayer = $player_anim
+@onready var ranksfx: AudioStreamPlayer = $ranksfx
+@onready var drumroll: AudioStreamPlayer = $drumroll
+@onready var ccallsfx: AudioStreamPlayer = $ccallsfx
+@onready var crashsfx: AudioStreamPlayer = $crashsfx
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +54,7 @@ func _on_timer_timeout() -> void:
 		o_timer.start(t)
 
 func _on_player_close_call () -> void:
+	ccallsfx.play()
 	p += 100
 	color_anim(points_l,Color.GREEN,Color.WHITE)
 	var t : Label = Label.new()
@@ -74,6 +79,7 @@ func _on_player_close_call () -> void:
 	tween.chain().tween_callback(t.queue_free)
 
 func _on_player_death() -> void:
+	crashsfx.play()
 	player.dead = true
 	var anim: Animation = player_anim.get_animation("player_death")
 	var track_idx = anim.find_track("player:position", Animation.TYPE_VALUE)
@@ -142,7 +148,7 @@ func end_match() -> void:
 	s1.outline_color = Color.DIM_GRAY
 	s1.font_size = 51
 	t1.label_settings = s1
-
+	drumroll.play()
 	t1.add_theme_font_override("font", anak_font)
 	t1.set_text("Tu calificacion es...")
 	t1.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -169,18 +175,22 @@ func end_match() -> void:
 			rank = "C"
 			r_color = Color.PURPLE
 			rankquote = "Falta sopa"
+			ranksfx.stream = load("res://Assets/Run/bad.ogg")
 		_ when p < 6000:
 			rank = "B"
 			r_color = Color.BLUE
 			rankquote = "Podia ser mejor..."
+			ranksfx.stream = load("res://Assets/Run/meh.ogg")
 		_ when p < 8000:
 			rank = "A"
 			r_color = Color.GREEN
 			rankquote = "Muy bueno! Podria ser aun mejor..."
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
 		_ when p >= 8000 and p < 16000:
 			rank = "S"
 			r_color = Color.GOLD
 			rankquote = "Excelente!"
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
 		_ when p >= 16000:
 			rank = "Z"
 			r_color = Color.RED
@@ -188,10 +198,13 @@ func end_match() -> void:
 			rank_t.label_settings.outline_color = Color.BLACK
 			rank_t.material = rainbow_z
 			rankquote = "...Como?"
+			ranksfx.stream = load("res://Assets/angel.mp3")
+			ranksfx.volume_db = -10
 	Global.rank_bici = rank
 	rank_t.label_settings.font_color = r_color
 	await get_tree().create_timer(3).timeout
 	rank_t.set_text(rank)
+	ranksfx.play()
 	await get_tree().create_timer(1).timeout
 	var t2 : Label = Label.new()
 	var s2 := LabelSettings.new()
