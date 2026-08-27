@@ -12,7 +12,11 @@ extends Node2D
 @onready var bad: AudioStreamPlayer2D = $SFX/Bad
 @onready var meh: AudioStreamPlayer2D = $SFX/Meh
 @onready var rank_l: Label = $Rank
+@onready var ranksfx: AudioStreamPlayer2D = $SFX/ranksfx
+@onready var drumroll: AudioStreamPlayer = $SFX/drumroll
 
+const rainbow_z = preload("uid://dkbg8gg3r3jxq")
+const anak_font = preload("uid://bcbpgqxrs45xl")
 const TILE: PackedScene = preload("uid://coebnaadnhd85")
 
 var multiplicador_v: float = 1.0
@@ -29,7 +33,6 @@ var racha_verdes: int = 0
 var racha_fallos: int = 0
 
 func _ready() -> void:
-	audio_stream_player_2d.play()
 	$Timer.start()
 	animation_player.play("Good") 
 	cambiar_estado(State.NORMAL)
@@ -265,9 +268,38 @@ func _on_pitchscale_timeout() -> void:
 	print(multiplicador_v)
 
 func rank_calc() -> void:
+	var rankquote: String
 	rank_l.z_index = 21
 	$Button.show()
 	$Button.z_index = 21
+	await get_tree().create_timer(1.5).timeout
+	var t1 : Label = Label.new()
+	var s1 := LabelSettings.new()
+
+	# 1. Configura el texto y tamaño de fuente PRIMERO
+	s1.outline_size = 5
+	s1.outline_color = Color.DIM_GRAY
+	s1.font_size = 51
+	t1.label_settings = s1
+	drumroll.play()
+	t1.add_theme_font_override("font", anak_font)
+	t1.set_text("Tu calificacion es...")
+	t1.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t1.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	t1.z_index = 21
+
+	add_child(t1)
+
+	# 2. Recalcula el tamaño del Label con la nueva fuente/texto
+	t1.reset_size()
+
+	# 3. Asigna el pivot exacto
+	t1.pivot_offset = Vector2(t1.size.x / 2.0, t1.size.y)
+
+	# 4. Ajusta la posición X restando la mitad del ancho del Label
+	var target_center_x := 960.0
+	var target_y := 165.0
+	t1.set_position(Vector2(target_center_x - (t1.size.x / 2.0), target_y))
 	var r_color: Color
 	rank_l.label_settings.outline_size = 15
 	rank_l.label_settings.outline_color = Color.WHITE
@@ -275,23 +307,66 @@ func rank_calc() -> void:
 		_ when puntaje < 2000:
 			rank = "C"
 			r_color = Color.PURPLE
+			rankquote = "Falta sopa"
+			ranksfx.stream = load("res://Assets/Run/bad.ogg")
 		_ when puntaje < 3000:
 			rank = "B"
 			r_color = Color.BLUE
+			rankquote = "Podia ser mejor..."
+			ranksfx.stream = load("res://Assets/Run/meh.ogg")
 		_ when puntaje < 4000:
 			rank = "A"
 			r_color = Color.GREEN
-		_ when puntaje >= 4000 and puntaje < 7500:
+			rankquote = "Muy bueno! Podria ser aun mejor..."
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
+		_ when puntaje >= 5000 and puntaje < 7500:
 			rank = "S"
 			r_color = Color.GOLD
-		_ when puntaje >= 7500:
+			rankquote = "Excelente!"
+			ranksfx.stream = load("res://Assets/Run/good.ogg")
+		_ when puntaje >= 75000:
 			rank = "Z"
 			r_color = Color.RED
-			rank_l.label_settings.outline_size = 30
+			rank_l.label_settings.outline_size = 0
 			rank_l.label_settings.outline_color = Color.BLACK
-	rank_l.set_text(rank)
+			rank_l.material = rainbow_z
+			rankquote = "...Como?"
+			ranksfx.stream = load("res://Assets/angel.mp3")
+			ranksfx.volume_db = -10
+	Global.rank_run = rank
+	Global.p_run = puntaje
 	rank_l.label_settings.font_color = r_color
+	await get_tree().create_timer(3).timeout
+	rank_l.set_text(rank)
+	ranksfx.play()
+	await get_tree().create_timer(1).timeout
+	var t2 : Label = Label.new()
+	var s2 := LabelSettings.new()
 
+	# 1. Configura el texto y tamaño de fuente PRIMERO
+	s2.outline_size = 5
+	s2.outline_color = Color.DIM_GRAY
+	s2.font_size = 51
+	t2.label_settings = s2
+
+	t2.add_theme_font_override("font", anak_font)
+	t2.set_text(rankquote)
+	t2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t2.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	t2.z_index = 21
+
+	add_child(t2)
+
+	# 2. Recalcula el tamaño del Label con la nueva fuente/texto
+	t2.reset_size()
+
+	# 3. Asigna el pivot exacto
+	t2.pivot_offset = Vector2(t2.size.x / 2.0, t2.size.y)
+
+	# 4. Ajusta la posición X restando la mitad del ancho del Label
+	var target_center_x1 := 960.0
+	var target_y1 := 500.0
+	t2.set_position(Vector2(target_center_x1 - (t2.size.x / 2.0), target_y1))
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Escenas/Bicicleta/bicicleta.tscn")

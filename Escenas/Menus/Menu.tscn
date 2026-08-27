@@ -4,6 +4,8 @@
 [ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="2_xelx8"]
 [ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="2_xhjix"]
 [ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="4_58kv0"]
+[ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="5_8j806"]
+[ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="6_734vi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8j806"]
 bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
@@ -63,6 +65,20 @@ _data = {
 &"RESET": SubResource("Animation_o2l53")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ludhm"]
+shader = ExtResource("5_8j806")
+shader_parameter/g_random_seed = 0.0
+shader_parameter/g_grid_size = Vector2(16, 9)
+shader_parameter/g_cell_offset = Vector2(0, 0)
+shader_parameter/g_speed = Vector2(2.515, 2.03)
+shader_parameter/g_draw_size_min = 0.030000001425
+shader_parameter/g_draw_size_max = 0.400000019
+shader_parameter/g_color_a = Color(0.36534345, 0.00010107458, 0.37053233, 0)
+shader_parameter/g_color_b = Color(1, 1, 1, 1)
+shader_parameter/g_rot_global_speed = 1.0
+shader_parameter/g_rot_min_speed = 0.1
+shader_parameter/g_rot_max_speed = 1.0
+
 [node name="Menu" type="Node2D" unique_id=1003166106]
 script = ExtResource("1_xe2ru")
 
@@ -73,13 +89,13 @@ offset_top = -34.0
 offset_right = 1994.0
 offset_bottom = 1104.0
 mouse_behavior_recursive = 1
-color = Color(0.7372549, 1, 0.6156863, 1)
+color = Color(0.9572337, 0.9233991, 0.8457969, 1)
 
 [node name="Play" type="Button" parent="." unique_id=1683395730]
 offset_left = 871.0
-offset_top = 431.0
+offset_top = 427.0
 offset_right = 1071.0
-offset_bottom = 501.0
+offset_bottom = 497.0
 theme_override_fonts/font = ExtResource("2_xelx8")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_8j806")
@@ -143,6 +159,13 @@ text = "STICKATHLON"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=176556781]
 libraries/ = SubResource("AnimationLibrary_425bc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1918861508]
+z_index = -10
+material = SubResource("ShaderMaterial_ludhm")
+position = Vector2(960, 540.5)
+scale = Vector2(8, 4.2480316)
+texture = ExtResource("6_734vi")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Puntajes" to="." method="_on_puntajes_pressed"]

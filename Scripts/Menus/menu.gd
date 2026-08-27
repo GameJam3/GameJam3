@@ -20,4 +20,5 @@ func _on_credits_pressed() -> void:
 
 
 func _on_puntajes_pressed() -> void:
-	pass # Replace with function body.
+	transition.call_deferred("play_anim", "Fade_Out")
+	transition.call_deferred("cambio_escena", "res://Escenas/tabla_clasificacion.tscn")

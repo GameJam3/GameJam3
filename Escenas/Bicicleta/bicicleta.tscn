@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cc845us12pr1u" path="res://Assets/Bicicleta/bg.png" id="4_dveff"]
 [ext_resource type="Shader" uid="uid://ceweoaxqk75c8" path="res://Escenas/Bicicleta/rainbow_border.gdshader" id="5_43orh"]
 [ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="6_ynon8"]
+[ext_resource type="PackedScene" uid="uid://d31gwjnp2nn6t" path="res://Escenas/Menus/Transition.tscn" id="6_ynon8"]
 [ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="7_h7v1x"]
 [ext_resource type="AudioStream" uid="uid://ci54kvg6wbj6m" path="res://Assets/drumroll.mp3" id="8_srhs2"]
 [ext_resource type="AudioStream" uid="uid://bj3u0ianvxi73" path="res://Assets/Bicicleta/crash.mp3" id="9_7nrje"]
