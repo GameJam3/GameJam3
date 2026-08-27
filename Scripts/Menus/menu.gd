@@ -16,8 +16,7 @@ func _on_exit_pressed() -> void:
 
 func _on_credits_pressed() -> void:
 	transition.call_deferred("play_anim", "Fade_Out")
-	$Timer.start()
-
+	transition.call_deferred("cambio_escena", "res://Escenas/Menus/Creditos.tscn")
 
 func _on_puntajes_pressed() -> void:
 	transition.call_deferred("play_anim", "Fade_Out")
