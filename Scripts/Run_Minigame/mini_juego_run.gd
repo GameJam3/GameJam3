@@ -9,6 +9,9 @@ extends Node2D
 @onready var player_sprite: AnimatedSprite2D = $Player
 @onready var parallax: Parallax2D = $Parallax2D
 @onready var good: AudioStreamPlayer2D = $SFX/Good
+@onready var bad: AudioStreamPlayer2D = $SFX/Bad
+@onready var meh: AudioStreamPlayer2D = $SFX/Meh
+@onready var rank_l: Label = $Rank
 
 const TILE: PackedScene = preload("uid://coebnaadnhd85")
 
@@ -17,6 +20,7 @@ var active_tiles: Array[Node2D] = []
 var puntaje: int = 0
 var tween_circulo: Tween 
 var tween_puntaje: Tween 
+var rank: String
 
 enum State { BOOSTED, NORMAL, BAD, SLOW }
 var estado_actual: State = State.NORMAL
@@ -27,7 +31,6 @@ var racha_fallos: int = 0
 func _ready() -> void:
 	audio_stream_player_2d.play()
 	$Timer.start()
-	
 	animation_player.play("Good") 
 	cambiar_estado(State.NORMAL)
 
@@ -63,24 +66,32 @@ func _unhandled_input(event: InputEvent) -> void:
 				actualizar_color_puntaje(Color.GREEN) 
 				registrar_acierto_verde() 
 				eliminar_tile(current_tile)
+				muestra_puntaje(150)
 			elif distancia <= 125.0:
 				puntaje += 75
-				good.play()
+				meh.play()
 				actualizar_color_circulo(Color.YELLOW) 
 				actualizar_color_puntaje(Color.GREEN) 
 				registrar_fallo()
 				eliminar_tile(current_tile)
+				muestra_puntaje(75)
 			else:
 				puntaje -= 50
+				bad.play()
 				actualizar_color_circulo(Color.RED) 
 				actualizar_color_puntaje(Color.RED) 
 				registrar_fallo()
 				eliminar_tile(current_tile)
+				muestra_puntaje(-50)
 		else:
 			if distancia <= 125.0:
+				bad.play()
 				puntaje -= 25
+				muestra_puntaje(-25)
 			else:
+				bad.play()
 				puntaje -= 50
+				muestra_puntaje(-50)
 			actualizar_color_circulo(Color.RED) 
 			actualizar_color_puntaje(Color.RED) 
 			registrar_fallo()
@@ -102,11 +113,13 @@ func _on_detector_area_exited(area: Area2D) -> void:
 		tile_exited = area
 		
 	if tile_exited in active_tiles:
+		bad.play()
 		puntaje -= 25
 		actualizar_color_circulo(Color.RED)
 		actualizar_color_puntaje(Color.RED) 
 		registrar_fallo()
 		eliminar_tile(tile_exited)
+		muestra_puntaje(-25)
 
 func registrar_acierto_verde() -> void:
 	racha_verdes += 1
@@ -175,7 +188,6 @@ func actualizar_color_circulo(nuevo_color: Color) -> void:
 	tween_circulo.tween_interval(0.08) 
 	tween_circulo.tween_property(circle, "modulate", Color.WHITE, 0.12) 
 
-# CAMBIO: Función para cambiar el color del Label del puntaje y regresar suavemente a blanco
 func actualizar_color_puntaje(nuevo_color: Color) -> void:
 	if tween_puntaje and tween_puntaje.is_valid():
 		tween_puntaje.kill()
@@ -195,7 +207,15 @@ func eliminar_tile(tile: Node2D) -> void:
 func _on_audio_stream_player_2d_finished() -> void:
 	$Timer.stop()
 	set_process_unhandled_input(false)
+	rank_calc()
 	
+	# Vacía el arreglo primero para evitar penalizaciones en detector_area_exited
+	var tiles_a_eliminar = active_tiles.duplicate()
+	active_tiles.clear()
+	for tile in tiles_a_eliminar:
+		if is_instance_valid(tile):
+			tile.queue_free()
+
 	var anim: Animation = animation_player.get_animation("Final")
 	
 	var track_idx = anim.find_track("Player:position", Animation.TYPE_VALUE)
@@ -204,7 +224,68 @@ func _on_audio_stream_player_2d_finished() -> void:
 		anim.track_set_key_value(track_idx, 0, player_sprite.position)
 	
 	animation_player.play("Final")
+	
+func muestra_puntaje(puntos_obtenidos: int) -> void:
+	var t: Label = Label.new()
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	
+	var fuente = load("res://Assets/Fonts/Anak Orang.ttf")
+	t.add_theme_font_override("font", fuente)
+	t.add_theme_font_size_override("font_size", 70)
+	t.add_theme_color_override("font_outline_color", Color.BLACK)
+	t.add_theme_constant_override("outline_size", 30) 
+	
+	if puntos_obtenidos > 0:
+		t.set_text("+" + str(puntos_obtenidos))
+	else:
+		t.set_text(str(puntos_obtenidos))
+	
+	if puntos_obtenidos >= 150:
+		t.modulate = Color.GREEN
+	elif puntos_obtenidos > 0:
+		t.modulate = Color.YELLOW
+	else:
+		t.modulate = Color.RED
+
+	add_child(t)
+	t.reset_size()
+	t.pivot_offset = Vector2(t.size.x / 2.0, t.size.y)
+	t.set_position($Circle.global_position - Vector2(t.size.x / 2.0, 100))
+	
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(t, "scale", Vector2(1, 1), 0.3).from(Vector2.ZERO)
+	tween.tween_property(t, "position:y", t.position.y - 50, 0.4)
+	tween.tween_property(t, "modulate:a", 0.0, 0.4)
+	tween.chain().tween_callback(t.queue_free)
 
 func _on_pitchscale_timeout() -> void:
 	multiplicador_v += 0.06
 	print(multiplicador_v)
+
+func rank_calc() -> void:
+	rank_l.z_index = 21
+	var r_color: Color
+	rank_l.label_settings.outline_size = 15
+	rank_l.label_settings.outline_color = Color.WHITE
+	match puntaje:
+		_ when puntaje < 2000:
+			rank = "C"
+			r_color = Color.PURPLE
+		_ when puntaje < 3000:
+			rank = "B"
+			r_color = Color.BLUE
+		_ when puntaje < 4000:
+			rank = "A"
+			r_color = Color.GREEN
+		_ when puntaje >= 4000 and puntaje < 7500:
+			rank = "S"
+			r_color = Color.GOLD
+		_ when puntaje >= 7500:
+			rank = "Z"
+			r_color = Color.RED
+			rank_l.label_settings.outline_size = 30
+			rank_l.label_settings.outline_color = Color.BLACK
+	rank_l.set_text(rank)
+	rank_l.label_settings.font_color = r_color

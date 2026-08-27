@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://g4ed1r1y0sp3"]
+
+[ext_resource type="Texture2D" uid="uid://c7ib5mpysx413" path="res://Assets/Nado/1.png" id="1_pd2kt"]
+[ext_resource type="Script" uid="uid://3o6tb508bh02" path="res://Scripts/Nado/nado.gd" id="1_wnw63"]
+[ext_resource type="Texture2D" uid="uid://cy5mmi8wt8ssv" path="res://Assets/Nado/2.png" id="2_syafe"]
+[ext_resource type="Texture2D" uid="uid://c8png3dlcfnjd" path="res://Assets/Nado/Buceo0.png" id="4_p3xav"]
+[ext_resource type="Texture2D" uid="uid://uvh0k1yf03j1" path="res://Assets/Nado/Buceo1.png" id="5_7w53l"]
+[ext_resource type="Texture2D" uid="uid://b77gj5tnphu5v" path="res://Assets/Nado/Buceo2.png" id="6_h1v84"]
+[ext_resource type="Texture2D" uid="uid://omklh2aw5eyf" path="res://Assets/Nado/Buceo3.png" id="7_udiur"]
+[ext_resource type="Texture2D" uid="uid://ch0ecph56hiyr" path="res://Assets/Nado/Nado0.png" id="8_sawib"]
+[ext_resource type="Texture2D" uid="uid://brb1xjcjcpcuk" path="res://Assets/Nado/Nado1.png" id="9_muglk"]
+[ext_resource type="Texture2D" uid="uid://d35s5xs8kul3v" path="res://Assets/Nado/Nado2.png" id="10_whp32"]
+[ext_resource type="Texture2D" uid="uid://d3e02yopg7wj1" path="res://Assets/Nado/Nado3.png" id="11_wscgq"]
+[ext_resource type="Texture2D" uid="uid://06kc4brdmy2u" path="res://Assets/Nado/Nado4.png" id="12_rj7yp"]
+[ext_resource type="Texture2D" uid="uid://dadike0s3oo4t" path="res://Assets/Nado/Nado5.png" id="13_ucvxt"]
+[ext_resource type="Script" uid="uid://jqdwqivhted1" path="res://Scripts/Nado/personaje.gd" id="14_yiebs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_p3xav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7w53l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h1v84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_udiur")
+}],
+"loop": 1,
+"name": &"buceo",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_sawib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_muglk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_whp32")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wscgq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rj7yp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ucvxt")
+}],
+"loop": 1,
+"name": &"nado",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
+size = Vector2(149, 39)
+
+[node name="Nado" type="Node2D" unique_id=1258112035]
+script = ExtResource("1_wnw63")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1629778303]
+scroll_offset = Vector2(-937, 141)
+repeat_size = Vector2(2112, 0)
+autoscroll = Vector2(-250, 0)
+repeat_times = 2
+
+[node name="1" type="Sprite2D" parent="Parallax2D" unique_id=871147091]
+position = Vector2(1902, 404)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_pd2kt")
+
+[node name="2" type="Sprite2D" parent="Parallax2D" unique_id=826120251]
+position = Vector2(1902, 404)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_syafe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=888828913]
+position = Vector2(159, 136)
+sprite_frames = SubResource("SpriteFrames_det5f")
+animation = &"buceo"
+frame_progress = 0.9904872
+
+[node name="Personaje" type="Area2D" parent="." unique_id=563626331]
+script = ExtResource("14_yiebs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Personaje" unique_id=1100684633]
+position = Vector2(147, 156)
+shape = SubResource("RectangleShape2D_a62a2")
