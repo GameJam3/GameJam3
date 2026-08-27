@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c28uwhab760k3"]
 
 [ext_resource type="Script" uid="uid://b8p6bph5myqpt" path="res://Scripts/Menus/creditos.gd" id="1_l03m2"]
-[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="2_ol584"]
+[ext_resource type="PackedScene" uid="uid://d31gwjnp2nn6t" path="res://Escenas/Menus/Transition.tscn" id="2_ol584"]
 [ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="3_g3uou"]
 [ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="4_5ek67"]
 [ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="5_3k7ua"]

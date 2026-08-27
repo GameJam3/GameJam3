@@ -277,6 +277,7 @@ offset_left = -700.0
 offset_top = -100.0
 offset_right = 1381.0
 offset_bottom = 1261.0
+mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 1)
 
 [node name="TransitionBarrierR" type="ColorRect" parent="Transition" unique_id=796947603]
@@ -285,6 +286,7 @@ offset_left = 600.0
 offset_top = -100.0
 offset_right = 2608.0056
 offset_bottom = 1261.0
+mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 1)
 
 [node name="TransitionPanel" type="ColorRect" parent="Transition" unique_id=475041103]
