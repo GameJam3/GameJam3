@@ -4,7 +4,6 @@ var r
 var p = 0
 var extra = 0
 var rank: String
-var r_color: Color
 var fade_tween: Tween
 @onready var points_l: Label = $points
 @onready var player: Node2D = $player
@@ -14,6 +13,8 @@ var fade_tween: Tween
 @onready var survive_timer: Timer = $survive_timer
 @onready var rank_t: Label = $rank
 @onready var fuego: TextureRect = $fuego
+@onready var o_timer: Timer = $obstacle_timer
+const rainbow_z = preload("uid://dkbg8gg3r3jxq")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,9 +26,12 @@ func _ready() -> void:
 	player.normal_spot.connect(_on_normal_spot)
 	fuego.material.set_shader_parameter("fire_aperture", 3.0)
 	fuego.hide()
+	o_timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_P):
+		p = 8000
 	points_l.set_text("PUNTOS: " + str(p))
 	tiempo_l.set_text("TIEMPO: " + str(int(tiempo_general.time_left)))
 	if (player.stop):
@@ -36,14 +40,16 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	if (!player.stop):
-		r = randf_range(665,1350)
+		r = randf_range(726,1200)
 		var obstaculo = ob.instantiate()
 		obstaculo.global_position.x = r
 		add_child(obstaculo)
+		var t = randf_range(0.3,0.7)
+		o_timer.start(t)
 
 func _on_player_close_call () -> void:
 	p += 100
-	color_anim(points_l,Color.BLUE,Color.WHITE)
+	color_anim(points_l,Color.GREEN,Color.WHITE)
 	var t : Label = Label.new()
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	t.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -57,21 +63,7 @@ func _on_player_close_call () -> void:
 	tween.tween_callback(t.queue_free)
 
 func _on_player_death() -> void:
-	match p:
-		_ when p < 2000:
-			rank = "C"
-			r_color = Color.PURPLE
-		_ when p < 3000:
-			rank = "B"
-			r_color = Color.BLUE
-		_ when p < 4000:
-			rank = "A"
-			r_color = Color.GREEN
-		_ when p >= 4000:
-			rank = "S"
-			r_color = Color.GOLD
-	rank_t.set_text(rank)
-	rank_t.label_settings.font_color = r_color
+	rank_calc()
 
 func _on_sweet_spot() -> void:
 	extra = 50
@@ -102,6 +94,17 @@ func color_anim(l: Label, c1: Color, c2: Color) -> void:
 
 func _on_tiempo_general_timeout() -> void:
 	player.stop = true
+	rank_calc()
+
+
+
+func _on_survive_timer_timeout() -> void:
+	p += 25 + extra
+
+func rank_calc() -> void:
+	var r_color: Color
+	rank_t.label_settings.outline_size = 15
+	rank_t.label_settings.outline_color = Color.WHITE
 	match p:
 		_ when p < 2000:
 			rank = "C"
@@ -112,12 +115,14 @@ func _on_tiempo_general_timeout() -> void:
 		_ when p < 4000:
 			rank = "A"
 			r_color = Color.GREEN
-		_ when p >= 4000:
+		_ when p >= 4000 and p < 8000:
 			rank = "S"
 			r_color = Color.GOLD
+		_ when p >= 8000:
+			rank = "Z"
+			r_color = Color.RED
+			rank_t.label_settings.outline_size = 30
+			rank_t.label_settings.outline_color = Color.BLACK
+			rank_t.material = rainbow_z
 	rank_t.set_text(rank)
 	rank_t.label_settings.font_color = r_color
-
-
-func _on_survive_timer_timeout() -> void:
-	p += 25 + extra

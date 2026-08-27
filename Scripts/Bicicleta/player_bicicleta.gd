@@ -17,16 +17,16 @@ func _physics_process(delta: float) -> void:
 	speed.y = accel.y
 	if (!stop): 
 		if Input.is_key_pressed(KEY_A):
-			accel.x += 0.7
+			accel.x += 1
 			position.x -= speed.x
 		if Input.is_key_pressed(KEY_D):
-			accel.x += 0.7
+			accel.x += 1
 			position.x += speed.x
 		if Input.is_key_pressed(KEY_S):
-			accel.y += 0.7
+			accel.y += 1
 			position.y += speed.y
 		if Input.is_key_pressed(KEY_W):
-			accel.y += 0.7
+			accel.y += 1
 			position.y -= speed.y
 	accel.x -= 0.5
 	accel.y -= 0.5

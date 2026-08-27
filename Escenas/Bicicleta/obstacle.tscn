@@ -1,12 +1,37 @@
 [gd_scene format=3 uid="uid://duelamvjwic0t"]
 
 [ext_resource type="Script" uid="uid://01oc5nb5l5mp" path="res://Scripts/Bicicleta/obstacle.gd" id="1_at4xo"]
+[ext_resource type="Texture2D" uid="uid://cyk16vefibiat" path="res://Assets/Bicicleta/cars.png" id="2_2bp21"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5n52"]
-size = Vector2(95.25, 120)
+size = Vector2(60.3125, 119.95625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
-size = Vector2(95.25, 120.5)
+size = Vector2(61, 120.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs4ir"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(233, 100.5, 29, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bp21"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(93.318596, 82.493286, 27.941452, 50.784485)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls7ol"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(65.37713, 78.63669, 27.941452, 51.53647)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsjqm"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(426.13245, 111.54552, 26.078705, 43.464493)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oebhe"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(477.66895, 115.27105, 26.078674, 42.843575)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuq1u"]
+atlas = ExtResource("2_2bp21")
+region = Rect2(373.97507, 105.95724, 26.078674, 48.43186)
 
 [node name="Node2D" type="Node2D" unique_id=918048774]
 position = Vector2(0, -35.275)
@@ -19,7 +44,7 @@ position = Vector2(0, -35.275)
 position = Vector2(0, -35.275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="closecall" unique_id=175412744]
-position = Vector2(0, -35.275)
+position = Vector2(0.15625, -35.47187)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_l5n52")
 debug_color = Color(0.91115916, 0.000102229715, 0.72932315, 0.41960785)
@@ -28,7 +53,55 @@ debug_color = Color(0.91115916, 0.000102229715, 0.72932315, 0.41960785)
 position = Vector2(0, -35.275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="car" unique_id=853292876]
-position = Vector2(0, -35.275)
+position = Vector2(-0.5, -35.275)
 shape = SubResource("RectangleShape2D_xs4ir")
+
+[node name="auto_rojo" type="Sprite2D" parent="." unique_id=1425153372]
+visible = false
+texture_filter = 1
+position = Vector2(0, -70.725)
+scale = Vector2(2.55, 2.55)
+texture = SubResource("AtlasTexture_xs4ir")
+flip_v = true
+
+[node name="auto_amarillo" type="Sprite2D" parent="." unique_id=761047394]
+visible = false
+texture_filter = 1
+position = Vector2(0, -70.725)
+scale = Vector2(2.55, 2.55)
+texture = SubResource("AtlasTexture_2bp21")
+flip_v = true
+
+[node name="auto_blanco" type="Sprite2D" parent="." unique_id=1324951996]
+visible = false
+texture_filter = 1
+position = Vector2(0, -69.72499)
+scale = Vector2(2.55, 2.3921568)
+texture = SubResource("AtlasTexture_ls7ol")
+flip_v = true
+
+[node name="auto_azul" type="Sprite2D" parent="." unique_id=558416692]
+visible = false
+texture_filter = 1
+position = Vector2(0, -69.725)
+scale = Vector2(2.55, 2.7906973)
+texture = SubResource("AtlasTexture_lsjqm")
+flip_v = true
+
+[node name="auto_rojo2" type="Sprite2D" parent="." unique_id=1435989183]
+visible = false
+texture_filter = 1
+position = Vector2(0, -70.422676)
+scale = Vector2(2.55, 2.871539)
+texture = SubResource("AtlasTexture_oebhe")
+flip_v = true
+
+[node name="auto_naranja" type="Sprite2D" parent="." unique_id=53840083]
+visible = false
+texture_filter = 1
+position = Vector2(0, -78.725)
+scale = Vector2(2.55, 2.871539)
+texture = SubResource("AtlasTexture_wuq1u")
+flip_v = true
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

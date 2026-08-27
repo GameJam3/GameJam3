@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://dbfivhavre4pd"]
 
 [ext_resource type="Script" uid="uid://dvuxdg5mlna32" path="res://Scripts/Bicicleta/player_bicicleta.gd" id="1_lnkfp"]
+[ext_resource type="Texture2D" uid="uid://bqvdrm02w3q7l" path="res://Assets/Bicicleta/bike1.png" id="2_yy50k"]
+[ext_resource type="Texture2D" uid="uid://c1v4pumcau3pn" path="res://Assets/Bicicleta/bike2.png" id="3_26dpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs4ir"]
 size = Vector2(86.46875, 117.390625)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1k8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yy50k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_26dpd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D" unique_id=633465506]
 script = ExtResource("1_lnkfp")
@@ -11,7 +27,15 @@ script = ExtResource("1_lnkfp")
 [node name="Area2D" type="Area2D" parent="." unique_id=1943153438]
 
 [node name="hitbox" type="CollisionShape2D" parent="Area2D" unique_id=793657812]
+scale = Vector2(0.585, 1)
 shape = SubResource("RectangleShape2D_xs4ir")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1264184700]
+position = Vector2(7, -16)
+scale = Vector2(0.69166666, 0.72047246)
+sprite_frames = SubResource("SpriteFrames_o1k8w")
+autoplay = "default"
+frame_progress = 0.15348315
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
