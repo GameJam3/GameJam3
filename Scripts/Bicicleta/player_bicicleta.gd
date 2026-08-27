@@ -56,3 +56,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(area.is_in_group("sweet_spot") or area.is_in_group("sour_spot")):
 		normal_spot.emit()
+		
+func just_die() -> void:
+	$AnimatedSprite2D.play("death")

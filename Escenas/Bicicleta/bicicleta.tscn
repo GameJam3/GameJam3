@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://kcwps5do4mt2" path="res://Scripts/Bicicleta/bicicleta.gd" id="1_18o8o"]
 [ext_resource type="PackedScene" uid="uid://dbfivhavre4pd" path="res://Escenas/Bicicleta/player_bicicleta.tscn" id="2_6at3b"]
-[ext_resource type="Shader" uid="uid://cw3ppkov2285d" path="res://Assets/fire.gdshader" id="3_6at3b"]
 [ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_43orh"]
 [ext_resource type="Texture2D" uid="uid://cc845us12pr1u" path="res://Assets/Bicicleta/bg.png" id="4_dveff"]
+[ext_resource type="Shader" uid="uid://ceweoaxqk75c8" path="res://Escenas/Bicicleta/rainbow_border.gdshader" id="5_43orh"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Transition.tscn" id="6_ynon8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_18o8o"]
 font = ExtResource("3_43orh")
@@ -40,40 +41,89 @@ size = Vector2(788, 444)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1k8w"]
 size = Vector2(788, 229)
 
-[sub_resource type="Gradient" id="Gradient_yj7ul"]
-offsets = PackedFloat32Array(0.22666667, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs4ir"]
+shader = ExtResource("5_43orh")
+shader_parameter/border_px = 2.0
+shader_parameter/speed = 0.78000003379012
+shader_parameter/glow_intensity = 1.0
+shader_parameter/opacity = 0.0
+shader_parameter/node_size = Vector2(64, 64)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xurm"]
+[sub_resource type="Animation" id="Animation_ynon8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 761)]
+}
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vcmr7"]
-noise = SubResource("FastNoiseLite_1xurm")
-color_ramp = SubResource("Gradient_yj7ul")
+[sub_resource type="Animation" id="Animation_srhs2"]
+resource_name = "player_death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 761), Vector2(900.275, 660.425)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"just_die"
+}]
+}
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1k8w"]
-shader = ExtResource("3_6at3b")
-shader_parameter/noise_tex = SubResource("NoiseTexture2D_vcmr7")
-shader_parameter/bottom_color = Color(1, 0.03137255, 0, 1)
-shader_parameter/middle_color = Color(1, 0.5, 0, 1)
-shader_parameter/top_color = Color(1, 0.03, 0.001, 1)
-shader_parameter/fire_alpha = 1.0
-shader_parameter/fire_speed = Vector2(0, 0.935)
-shader_parameter/fire_aperture = 0.15200000722
+[sub_resource type="Animation" id="Animation_h7v1x"]
+resource_name = "player_win"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1.0666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(960, 761), Vector2(960, 815.625), Vector2(960, 815.625), Vector2(960, -2000)]
+}
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l5n52"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_srhs2"]
+_data = {
+&"RESET": SubResource("Animation_ynon8"),
+&"player_death": SubResource("Animation_srhs2"),
+&"player_win": SubResource("Animation_h7v1x")
+}
 
 [node name="Node2D" type="Node2D" unique_id=16198870]
 script = ExtResource("1_18o8o")
 metadata/_edit_horizontal_guides_ = [-462.0]
 metadata/_edit_vertical_guides_ = [960.0, 1201.0]
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=648540808]
-z_index = -2
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="player" parent="." unique_id=633465506 instance=ExtResource("2_6at3b")]
+z_index = -2
 position = Vector2(960, 761)
 
 [node name="points" type="Label" parent="." unique_id=1898811310]
@@ -156,9 +206,9 @@ shape = SubResource("RectangleShape2D_o1k8w")
 debug_color = Color(0.23476815, 0.637634, 0, 0.41960785)
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=903789582]
-z_index = -1
+z_index = -20
 scroll_offset = Vector2(-51, -632)
-repeat_size = Vector2(0, 650)
+repeat_size = Vector2(840, 650)
 autoscroll = Vector2(0, 250)
 repeat_times = 3
 
@@ -166,24 +216,27 @@ repeat_times = 3
 position = Vector2(1011, 543)
 texture = ExtResource("4_dveff")
 
-[node name="fuego" type="TextureRect" parent="." unique_id=95905999]
-material = SubResource("ShaderMaterial_o1k8w")
-offset_left = 1380.0
-offset_top = 448.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-pivot_offset = Vector2(267, 135)
-texture = SubResource("PlaceholderTexture2D_l5n52")
+[node name="letterbox2" type="ColorRect" parent="." unique_id=673380185]
+offset_right = 539.0
+offset_bottom = 1076.0
+color = Color(0, 0, 0, 0.3137255)
 
-[node name="fuego" type="TextureRect" parent="fuego" unique_id=77444830]
-material = SubResource("ShaderMaterial_o1k8w")
-layout_mode = 0
-offset_left = -1380.0
-offset_top = -2.0
-offset_right = -840.0
-offset_bottom = 630.0
-pivot_offset = Vector2(267, 135)
-texture = SubResource("PlaceholderTexture2D_l5n52")
+[node name="letterbox" type="ColorRect" parent="." unique_id=1081341846]
+offset_left = 1382.0
+offset_right = 1921.0
+offset_bottom = 1076.0
+color = Color(0, 0, 0, 0.3137255)
+
+[node name="rainbow_border" type="ColorRect" parent="." unique_id=1771889977]
+material = SubResource("ShaderMaterial_xs4ir")
+offset_right = 1917.0
+offset_bottom = 1077.0
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("6_ynon8")]
+z_index = 20
+
+[node name="player_anim" type="AnimationPlayer" parent="." unique_id=47408598]
+libraries/ = SubResource("AnimationLibrary_srhs2")
 
 [connection signal="timeout" from="obstacle_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="tiempo_general" to="." method="_on_tiempo_general_timeout"]
