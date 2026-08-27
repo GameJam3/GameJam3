@@ -2,6 +2,7 @@ extends Node2D
 var speed: Vector2
 var accel: Vector2
 var stop: bool
+var dead: bool = false
 signal close_call
 signal player_death
 signal sweet_spot

@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://b72xrysndtqnd"]
+
+[ext_resource type="Script" uid="uid://dmxifn2emaaud" path="res://Escenas/tabla_clasificacion.gd" id="1_alqc1"]
+[ext_resource type="Shader" uid="uid://ceweoaxqk75c8" path="res://Escenas/Bicicleta/rainbow_border.gdshader" id="1_bossw"]
+[ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="2_bnp60"]
+[ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="3_alqc1"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="4_ctuqd"]
+[ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="5_ctuqd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l5n52"]
+shader = ExtResource("1_bossw")
+shader_parameter/border_px = 2.0
+shader_parameter/speed = 0.9
+shader_parameter/glow_intensity = 2.0
+shader_parameter/opacity = 1.0
+shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1k8w"]
+shader = ExtResource("2_bnp60")
+shader_parameter/g_random_seed = 0.0
+shader_parameter/g_grid_size = Vector2(16, 9)
+shader_parameter/g_cell_offset = Vector2(0, 0)
+shader_parameter/g_speed = Vector2(2.515, 2.03)
+shader_parameter/g_draw_size_min = 0.030000001425
+shader_parameter/g_draw_size_max = 0.400000019
+shader_parameter/g_color_a = Color(1, 1, 1, 0)
+shader_parameter/g_color_b = Color(1, 1, 1, 1)
+shader_parameter/g_rot_global_speed = 1.0
+shader_parameter/g_rot_min_speed = 0.1
+shader_parameter/g_rot_max_speed = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xs4ir"]
+font = ExtResource("4_ctuqd")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_obxus"]
+font = ExtResource("4_ctuqd")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm534"]
+font = ExtResource("4_ctuqd")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_l5n52"]
+font = ExtResource("4_ctuqd")
+font_size = 40
+
+[node name="Control" type="Control" unique_id=397851550]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_alqc1")
+
+[node name="borde" type="ColorRect" parent="." unique_id=1285645752]
+material = SubResource("ShaderMaterial_l5n52")
+layout_mode = 0
+offset_left = 1412.0
+offset_top = 136.0
+offset_right = 1887.0
+offset_bottom = 523.0
+
+[node name="ColorRect" type="ColorRect" parent="borde" unique_id=1294766374]
+z_index = -1
+layout_mode = 0
+offset_right = 475.0
+offset_bottom = 385.0
+color = Color(0.18431373, 0.18431373, 0.18431373, 1)
+
+[node name="borde2" type="ColorRect" parent="." unique_id=2038709135]
+material = SubResource("ShaderMaterial_l5n52")
+layout_mode = 0
+offset_left = 734.0
+offset_top = 135.0
+offset_right = 1209.0
+offset_bottom = 519.0
+
+[node name="ColorRect" type="ColorRect" parent="borde2" unique_id=1671485249]
+z_index = -1
+layout_mode = 0
+offset_right = 475.0
+offset_bottom = 385.0
+color = Color(0.18431373, 0.18431373, 0.18431373, 1)
+
+[node name="borde3" type="ColorRect" parent="." unique_id=971384592]
+material = SubResource("ShaderMaterial_l5n52")
+layout_mode = 0
+offset_left = 60.0
+offset_top = 140.0
+offset_right = 535.0
+offset_bottom = 519.0
+
+[node name="ColorRect" type="ColorRect" parent="borde3" unique_id=1498967125]
+z_index = -1
+layout_mode = 0
+offset_right = 475.0
+offset_bottom = 381.0
+color = Color(0.18431373, 0.18431373, 0.18431373, 1)
+
+[node name="borde4" type="ColorRect" parent="." unique_id=1031212339]
+material = SubResource("ShaderMaterial_l5n52")
+layout_mode = 0
+offset_left = 732.0
+offset_top = 643.0
+offset_right = 1207.0
+offset_bottom = 1023.0
+
+[node name="ColorRect" type="ColorRect" parent="borde4" unique_id=339811383]
+z_index = -1
+layout_mode = 0
+offset_top = 8.0
+offset_right = 474.0
+offset_bottom = 378.0
+color = Color(0.18359044, 0.18359044, 0.18359044, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1740765092]
+z_index = -2
+material = SubResource("ShaderMaterial_o1k8w")
+position = Vector2(960, 540.5)
+scale = Vector2(8, 4.2480316)
+texture = ExtResource("3_alqc1")
+
+[node name="ciclista" type="Label" parent="." unique_id=2052212277]
+material = ExtResource("5_ctuqd")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 66.0
+offset_right = 517.0
+offset_bottom = 127.0
+text = "Mejores ciclitstas"
+label_settings = SubResource("LabelSettings_xs4ir")
+
+[node name="nadador" type="Label" parent="." unique_id=1409909395]
+material = ExtResource("5_ctuqd")
+layout_mode = 0
+offset_left = 746.0
+offset_top = 67.0
+offset_right = 1203.0
+offset_bottom = 128.0
+text = "Mejores Nadadores"
+label_settings = SubResource("LabelSettings_obxus")
+
+[node name="corredor" type="Label" parent="." unique_id=795279844]
+material = ExtResource("5_ctuqd")
+layout_mode = 0
+offset_left = 1421.0
+offset_top = 69.0
+offset_right = 1878.0
+offset_bottom = 130.0
+text = "Mejores Corredores"
+label_settings = SubResource("LabelSettings_nm534")
+
+[node name="triatlones" type="Label" parent="." unique_id=1957234490]
+material = ExtResource("5_ctuqd")
+layout_mode = 0
+offset_left = 714.0
+offset_top = 581.0
+offset_right = 1223.0
+offset_bottom = 642.0
+text = "Mejores Stickatlones"
+label_settings = SubResource("LabelSettings_nm534")
+
+[node name="listabici" type="Label" parent="." unique_id=2072476987]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 153.0
+offset_right = 523.0
+offset_bottom = 514.0
+label_settings = SubResource("LabelSettings_l5n52")
+horizontal_alignment = 1
+
+[node name="listanado" type="Label" parent="." unique_id=1854448861]
+layout_mode = 0
+offset_left = 749.0
+offset_top = 146.0
+offset_right = 1196.0
+offset_bottom = 507.0
+label_settings = SubResource("LabelSettings_l5n52")
+horizontal_alignment = 1
+
+[node name="listarun" type="Label" parent="." unique_id=1372742436]
+layout_mode = 0
+offset_left = 1428.0
+offset_top = 147.0
+offset_right = 1875.0
+offset_bottom = 508.0
+label_settings = SubResource("LabelSettings_l5n52")
+horizontal_alignment = 1
+
+[node name="listatotal" type="Label" parent="." unique_id=1500779154]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 653.0
+offset_right = 1192.0
+offset_bottom = 1014.0
+label_settings = SubResource("LabelSettings_l5n52")
+horizontal_alignment = 1
