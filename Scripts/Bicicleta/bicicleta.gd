@@ -142,4 +142,4 @@ func end_match() -> void:
 			rank_t.material = rainbow_z
 	rank_t.set_text(rank)
 	rank_t.label_settings.font_color = r_color
-	transition.call_deferred("play_anim", "Fade_Out")
+	transition.call_deferred("play_anim", "Fade_Out_Puntaje")
