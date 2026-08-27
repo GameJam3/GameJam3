@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://dkbg8gg3r3jxq" path="res://Assets/Bicicleta/rainbow_z.material" id="4_58kv0"]
 [ext_resource type="Shader" uid="uid://dkpns8f27ay2" path="res://tiler.gdshader" id="5_8j806"]
 [ext_resource type="Texture2D" uid="uid://bxevvb5hhffbe" path="res://Assets/Bicicleta/dead.png" id="6_734vi"]
+[ext_resource type="AudioStream" uid="uid://0s6nt30gpde1" path="res://Assets/menu.mp3" id="7_734vi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8j806"]
 bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
@@ -166,6 +167,12 @@ material = SubResource("ShaderMaterial_ludhm")
 position = Vector2(960, 540.5)
 scale = Vector2(8, 4.2480316)
 texture = ExtResource("6_734vi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=324663013]
+stream = ExtResource("7_734vi")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Puntajes" to="." method="_on_puntajes_pressed"]
