@@ -718,7 +718,7 @@ stream = ExtResource("20_whp32")
 volume_db = -10.0
 
 [node name="Timer" type="Timer" parent="." unique_id=291705229]
-wait_time = 5.0
+wait_time = 45.0
 one_shot = true
 autostart = true
 
