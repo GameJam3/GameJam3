@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://rgiedtc2gv6t" path="res://Assets/Run/Parallax_Run/game_background_2/game_background_2.png" id="3_xevjx"]
 [ext_resource type="Texture2D" uid="uid://dad6uviy2nlec" path="res://Assets/Run/Circle.png" id="4_hy10v"]
 [ext_resource type="AudioStream" uid="uid://xgwrj0xbievq" path="res://Assets/Run/gameplay 3.ogg" id="6_eqhjf"]
-[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="7_xwoob"]
+[ext_resource type="PackedScene" uid="uid://d31gwjnp2nn6t" path="res://Escenas/Menus/Transition.tscn" id="7_xwoob"]
 [ext_resource type="Shader" uid="uid://883lgu02sy3s" path="res://Assets/Run/MiniJuegoRun.gdshader" id="8_2gvvb"]
 [ext_resource type="Texture2D" uid="uid://bifaybt5tkp1b" path="res://Assets/Run/Run0.png" id="8_i7bp8"]
 [ext_resource type="Texture2D" uid="uid://clrcqnrcnkhbo" path="res://Assets/Run/Run1.png" id="9_2gvvb"]
@@ -14,6 +14,28 @@
 [ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="12_3vjrd"]
 [ext_resource type="AudioStream" uid="uid://dulee4i66owwn" path="res://Assets/Run/bad.ogg" id="13_eqhjf"]
 [ext_resource type="AudioStream" uid="uid://dn6ryom8csa8r" path="res://Assets/Run/meh.ogg" id="14_uexv2"]
+[ext_resource type="AudioStream" uid="uid://ci54kvg6wbj6m" path="res://Assets/drumroll.mp3" id="15_uexv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uexv2"]
+bg_color = Color(0.83137256, 0.30588236, 0.38431373, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c72j"]
+bg_color = Color(0.57411045, 0.17052966, 0.23894876, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u0h7d"]
+bg_color = Color(0.271908, 0.059776537, 0.09643512, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
 size = Vector2(100, 100)
@@ -196,7 +218,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_eqhjf"]
 resource_name = "Final"
-length = 3.5000000000000004
+length = 6.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -216,7 +238,7 @@ tracks/1/path = NodePath("Transition")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.5),
+"times": PackedFloat32Array(1.5333333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [&"Fade_Out_Puntaje"],
@@ -230,7 +252,7 @@ tracks/2/path = NodePath("Rank:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.5, 3.5),
+"times": PackedFloat32Array(3.0666666, 3.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -262,47 +284,35 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Puntaje:position")
+tracks/5/path = NodePath("Puntaje:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.9666667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(850, 450)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Puntaje:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(2.5, 3.5),
+"times": PackedFloat32Array(4.0666666, 4.9666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(1.9333333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [120]
+"values": [100]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Button:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(2.5, 3.5),
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Button:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(6, 6.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -401,46 +411,34 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Puntaje:position")
+tracks/5/path = NodePath("Puntaje:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(16, 16)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Puntaje:modulate")
+tracks/6/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [80]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
+tracks/7/path = NodePath("Button:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [80]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Button:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -458,13 +456,20 @@ _data = {
 [node name="MiniJuegoRun" type="Node2D" unique_id=920342636]
 script = ExtResource("1_0gpwp")
 
-[node name="Button" type="Button" parent="." unique_id=429252946]
+[node name="Button" type="Button" parent="." unique_id=1638851044]
 visible = false
-offset_left = 843.0
-offset_top = 692.0
-offset_right = 1100.0
-offset_bottom = 784.0
-text = "CONTINUAR"
+z_index = 21
+offset_left = 864.0
+offset_top = 600.0
+offset_right = 1064.0
+offset_bottom = 670.0
+theme_override_fonts/font = ExtResource("3_7gq8g")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_uexv2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4c72j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u0h7d")
+text = "Next Game
+"
 
 [node name="Detector" type="Area2D" parent="." unique_id=1755045963]
 z_index = 1
@@ -483,10 +488,10 @@ position = Vector2(1811, 975)
 
 [node name="Puntaje" type="Label" parent="." unique_id=320936260]
 z_index = 1
-offset_left = 16.0
-offset_top = 10.0
-offset_right = 62.0
-offset_bottom = 120.0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 70.0
+offset_bottom = 127.0
 scale = Vector2(1.0028192, 1)
 theme_override_fonts/font = ExtResource("3_7gq8g")
 theme_override_font_sizes/font_size = 80
@@ -496,10 +501,9 @@ text = "0"
 visible = false
 z_index = 1
 offset_left = 678.0
-offset_top = 178.0
+offset_top = 225.0
 offset_right = 1246.0
-offset_bottom = 435.0
-text = "RANK"
+offset_bottom = 482.0
 label_settings = SubResource("LabelSettings_eqhjf")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -535,6 +539,7 @@ process_material = SubResource("ParticleProcessMaterial_xwoob")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=337052765]
 stream = ExtResource("6_eqhjf")
+autoplay = true
 
 [node name="Transition" parent="." unique_id=134153046 instance=ExtResource("7_xwoob")]
 z_index = 20
@@ -681,6 +686,12 @@ volume_db = 5.0
 [node name="Meh" type="AudioStreamPlayer2D" parent="SFX" unique_id=171277001]
 stream = ExtResource("14_uexv2")
 volume_db = 4.0
+
+[node name="ranksfx" type="AudioStreamPlayer2D" parent="SFX" unique_id=1804547226]
+
+[node name="drumroll" type="AudioStreamPlayer" parent="SFX" unique_id=1783954791]
+stream = ExtResource("15_uexv2")
+volume_db = -10.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="area_exited" from="Detector" to="." method="_on_detector_area_exited"]
