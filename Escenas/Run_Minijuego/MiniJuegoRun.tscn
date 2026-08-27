@@ -12,9 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://clrcqnrcnkhbo" path="res://Assets/Run/Run1.png" id="9_2gvvb"]
 [ext_resource type="Texture2D" uid="uid://blnwqgvbiw0fc" path="res://Assets/Run/Run2.png" id="10_3vjrd"]
 [ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="12_3vjrd"]
+[ext_resource type="AudioStream" uid="uid://dulee4i66owwn" path="res://Assets/Run/bad.ogg" id="13_eqhjf"]
+[ext_resource type="AudioStream" uid="uid://dn6ryom8csa8r" path="res://Assets/Run/meh.ogg" id="14_uexv2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
 size = Vector2(100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqhjf"]
+font = ExtResource("3_7gq8g")
+font_size = 180
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wdlwq"]
 particles_animation = true
@@ -79,7 +85,7 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gvvb"]
 shader = ExtResource("8_2gvvb")
 shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
-shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/glow_thickness = 1.50000007125
 shader_parameter/intensity = 0.50000002375
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_det5f"]
@@ -139,25 +145,25 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3shya"]
 shader = SubResource("Shader_3vjrd")
 shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
-shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/glow_thickness = 1.50000007125
 shader_parameter/intensity = 0.50000002375
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eqhjf"]
 shader = ExtResource("8_2gvvb")
 shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
-shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/glow_thickness = 1.50000007125
 shader_parameter/intensity = 0.50000002375
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uexv2"]
 shader = ExtResource("8_2gvvb")
 shader_parameter/glow_color = Color(0.98713666, 0, 0.23377377, 1)
-shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/glow_thickness = 1.50000007125
 shader_parameter/intensity = 0.50000002375
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c72j"]
 shader = ExtResource("8_2gvvb")
 shader_parameter/glow_color = Color(0.9882353, 0, 0.23529412, 1)
-shader_parameter/glow_thickness = 1.5000000712500001
+shader_parameter/glow_thickness = 1.50000007125
 shader_parameter/intensity = 0.50000002375
 
 [sub_resource type="Animation" id="Animation_2gvvb"]
@@ -190,7 +196,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_eqhjf"]
 resource_name = "Final"
-length = 3.0000000000000004
+length = 3.5000000000000004
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -202,6 +208,92 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1300, 615), Vector2(2100, 615)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Transition")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"Fade_Out_Puntaje"],
+"method": &"play_anim"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rank:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5333333, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Rank:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.1333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Puntaje:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.1666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Puntaje:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.9666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(850, 450)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Puntaje:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.4666667, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.9333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [120]
 }
 
 [sub_resource type="Animation" id="Animation_3vjrd"]
@@ -258,6 +350,78 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(918, 693)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rank:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Rank:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Puntaje:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Puntaje:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 16)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Puntaje:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Puntaje:theme_override_font_sizes/font_size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [80]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eqhjf"]
 _data = {
@@ -296,6 +460,18 @@ theme_override_fonts/font = ExtResource("3_7gq8g")
 theme_override_font_sizes/font_size = 80
 text = "0"
 
+[node name="Rank" type="Label" parent="." unique_id=387360356]
+visible = false
+z_index = 1
+offset_left = 678.0
+offset_top = 178.0
+offset_right = 1246.0
+offset_bottom = 435.0
+text = "RANK"
+label_settings = SubResource("LabelSettings_eqhjf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1339176610]
 offset_left = -389.0
 offset_top = 874.0
@@ -329,6 +505,7 @@ process_material = SubResource("ParticleProcessMaterial_xwoob")
 stream = ExtResource("6_2gvvb")
 
 [node name="Transition" parent="." unique_id=134153046 instance=ExtResource("7_xwoob")]
+z_index = 20
 
 [node name="Circle2" type="Sprite2D" parent="." unique_id=1961397241]
 modulate = Color(0, 0, 0, 1)
@@ -465,6 +642,14 @@ autostart = true
 [node name="Good" type="AudioStreamPlayer2D" parent="SFX" unique_id=474846643]
 stream = ExtResource("12_3vjrd")
 volume_db = -5.0
+
+[node name="Bad" type="AudioStreamPlayer2D" parent="SFX" unique_id=1464400151]
+stream = ExtResource("13_eqhjf")
+volume_db = 5.0
+
+[node name="Meh" type="AudioStreamPlayer2D" parent="SFX" unique_id=171277001]
+stream = ExtResource("14_uexv2")
+volume_db = 4.0
 
 [connection signal="area_exited" from="Detector" to="." method="_on_detector_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

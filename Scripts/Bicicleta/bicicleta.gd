@@ -5,7 +5,7 @@ var p = 0
 var extra = 0
 var rank: String
 var fade_tween: Tween
-@onready var points_l: Label = $points
+@onready var points_l : Label = $points
 @onready var player: Node2D = $player
 @onready var closecall_text: Label = $closecall_text
 @onready var tiempo_l: Label = $tiempo

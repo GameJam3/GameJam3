@@ -20,6 +20,10 @@ func _ready() -> void:
 	valor = randi_range(0, pool.size() - 1)
 	letra_mostrada = pool[valor]
 	label.text = letra_mostrada.capitalize()
-	
+	modulate.a = 0
 	color_tile = COLORES.get(letra_mostrada, Color.WHITE)
 	sprite.modulate = color_tile
+
+
+func _process(delta: float) -> void:
+	modulate.a += 0.03
