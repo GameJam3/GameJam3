@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="3_43orh"]
 [ext_resource type="Texture2D" uid="uid://cc845us12pr1u" path="res://Assets/Bicicleta/bg.png" id="4_dveff"]
 [ext_resource type="Shader" uid="uid://ceweoaxqk75c8" path="res://Escenas/Bicicleta/rainbow_border.gdshader" id="5_43orh"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="6_ynon8"]
 [ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Transition.tscn" id="6_ynon8"]
 [ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="7_h7v1x"]
 [ext_resource type="AudioStream" uid="uid://ci54kvg6wbj6m" path="res://Assets/drumroll.mp3" id="8_srhs2"]
@@ -150,6 +151,7 @@ text = "PLACEHOLDER"
 label_settings = SubResource("LabelSettings_xs4ir")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="rank" type="Label" parent="." unique_id=1448710308]
 z_index = 21
@@ -160,6 +162,7 @@ offset_bottom = 498.0
 label_settings = SubResource("LabelSettings_l5n52")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="wall" type="Area2D" parent="." unique_id=1075804496]
 position = Vector2(-51, 18)
@@ -223,17 +226,20 @@ texture = ExtResource("4_dveff")
 offset_right = 539.0
 offset_bottom = 1076.0
 color = Color(0, 0, 0, 0.3137255)
+metadata/_edit_use_anchors_ = true
 
 [node name="letterbox" type="ColorRect" parent="." unique_id=1081341846]
 offset_left = 1382.0
 offset_right = 1921.0
 offset_bottom = 1076.0
 color = Color(0, 0, 0, 0.3137255)
+metadata/_edit_use_anchors_ = true
 
 [node name="rainbow_border" type="ColorRect" parent="." unique_id=1771889977]
 material = SubResource("ShaderMaterial_xs4ir")
 offset_right = 1917.0
 offset_bottom = 1077.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Transition" parent="." unique_id=134153046 instance=ExtResource("6_ynon8")]
 z_index = 20

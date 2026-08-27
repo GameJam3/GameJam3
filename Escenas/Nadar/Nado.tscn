@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://06kc4brdmy2u" path="res://Assets/Nado/Nado4.png" id="12_rj7yp"]
 [ext_resource type="Texture2D" uid="uid://dadike0s3oo4t" path="res://Assets/Nado/Nado5.png" id="13_ucvxt"]
 [ext_resource type="Script" uid="uid://jqdwqivhted1" path="res://Scripts/Nado/personaje.gd" id="14_yiebs"]
+[ext_resource type="PackedScene" uid="uid://dd5ffu51o22iu" path="res://Escenas/Nadar/Moneda.tscn" id="16_7w53l"]
+[ext_resource type="FontFile" uid="uid://bcbpgqxrs45xl" path="res://Assets/Fonts/Anak Orang.ttf" id="17_h1v84"]
+[ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Menus/Transition.tscn" id="18_udiur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a62a2"]
 size = Vector2(149, 39)
@@ -68,8 +71,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_det5f"]
+size = Vector2(37387.5, 692)
+
 [node name="Nado" type="Node2D" unique_id=1258112035]
 script = ExtResource("1_wnw63")
+
+[node name="Puntaje" type="Label" parent="." unique_id=1565669584]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = 870.0
+offset_top = 20.0
+offset_right = 916.0
+offset_bottom = 130.0
+scale = Vector2(1.0028192, 1)
+theme_override_fonts/font = ExtResource("17_h1v84")
+theme_override_font_sizes/font_size = 80
+text = "0"
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1629778303]
 scroll_offset = Vector2(-937, 141)
@@ -87,18 +105,580 @@ position = Vector2(1902, 404)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_syafe")
 
-[node name="Personaje" type="Area2D" parent="." unique_id=563626331]
-position = Vector2(90, 47)
+[node name="Personaje" type="Area2D" parent="." unique_id=563626331 groups=["player"]]
+position = Vector2(108, 48)
 script = ExtResource("14_yiebs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Personaje" unique_id=1100684633]
-position = Vector2(147, 156)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_a62a2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Personaje" unique_id=888828913]
 material = SubResource("ShaderMaterial_7w53l")
-position = Vector2(159, 136)
+position = Vector2(14, -20)
 sprite_frames = SubResource("SpriteFrames_det5f")
 animation = &"buceo"
 autoplay = "buceo"
 frame_progress = 0.9904872
+
+[node name="Monedas" type="Node2D" parent="." unique_id=416171162]
+
+[node name="MonedasPatronA" type="Node2D" parent="Monedas" unique_id=595500379]
+
+[node name="Moneda" parent="Monedas/MonedasPatronA" unique_id=1028184537 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronA" unique_id=1259716523 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronA" unique_id=100015931 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronA" unique_id=1633085170 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronA" unique_id=1028097978 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronA" unique_id=1558681083 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronA" unique_id=1419802345 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronA" unique_id=677740738 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronA" unique_id=634096045 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronA" unique_id=206337197 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronA" unique_id=1331574501 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronA" unique_id=2130830832 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronA" unique_id=1672131746 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronA" unique_id=1376200340 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronB" type="Node2D" parent="Monedas" unique_id=893615524]
+position = Vector2(4693, 1292)
+rotation = -3.110144
+
+[node name="Moneda" parent="Monedas/MonedasPatronB" unique_id=1429645555 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronB" unique_id=1444511881 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronB" unique_id=674630667 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronB" unique_id=1428351771 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronB" unique_id=841666598 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronB" unique_id=1144699338 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronB" unique_id=320767697 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronB" unique_id=131776761 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronB" unique_id=539563566 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronB" unique_id=861535665 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronB" unique_id=602806156 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronB" unique_id=106646636 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronB" unique_id=190522485 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronB" unique_id=1939937834 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronC" type="Node2D" parent="Monedas" unique_id=817573092]
+position = Vector2(4767, 1053)
+rotation = -3.110144
+
+[node name="Moneda" parent="Monedas/MonedasPatronC" unique_id=1829284930 instance=ExtResource("16_7w53l")]
+position = Vector2(-365.184, 508.73425)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronC" unique_id=1204550768 instance=ExtResource("16_7w53l")]
+position = Vector2(258.97684, 345.02744)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronC" unique_id=1623900868 instance=ExtResource("16_7w53l")]
+position = Vector2(-208.32446, 501.79858)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronC" unique_id=1306047819 instance=ExtResource("16_7w53l")]
+position = Vector2(-479.51007, 627.3877)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronC" unique_id=495894519 instance=ExtResource("16_7w53l")]
+position = Vector2(-647.5526, 628.6722)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronC" unique_id=1151102206 instance=ExtResource("16_7w53l")]
+position = Vector2(-767.4931, 632.4454)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronC" unique_id=777077575 instance=ExtResource("16_7w53l")]
+position = Vector2(-882.69415, 150.8296)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronC" unique_id=1478403749 instance=ExtResource("16_7w53l")]
+position = Vector2(-1011.6616, 153.88632)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronC" unique_id=2034552669 instance=ExtResource("16_7w53l")]
+position = Vector2(-1924.9714, 126.59039)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronC" unique_id=774487601 instance=ExtResource("16_7w53l")]
+position = Vector2(-1622.951, 631.34344)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronC" unique_id=703056577 instance=ExtResource("16_7w53l")]
+position = Vector2(-1161.6504, 156.60379)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronC" unique_id=503655385 instance=ExtResource("16_7w53l")]
+position = Vector2(-49.371857, 497.79858)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronC" unique_id=39844301 instance=ExtResource("16_7w53l")]
+position = Vector2(98.37092, 360.08493)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronC" unique_id=1505642749 instance=ExtResource("16_7w53l")]
+position = Vector2(440.07593, 345.33325)
+
+[node name="MonedasPatronA2" type="Node2D" parent="Monedas" unique_id=602686203]
+position = Vector2(6591, -87)
+
+[node name="Moneda" parent="Monedas/MonedasPatronA2" unique_id=893191940 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronA2" unique_id=678202795 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronA2" unique_id=2133152036 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronA2" unique_id=1447027831 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronA2" unique_id=559503936 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronA2" unique_id=868288782 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronA2" unique_id=2134028579 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronA2" unique_id=1923028850 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronA2" unique_id=406439771 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronA2" unique_id=1795683329 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronA2" unique_id=1696168436 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronA2" unique_id=1660557586 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronA2" unique_id=905129883 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronA2" unique_id=1035834665 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronB2" type="Node2D" parent="Monedas" unique_id=1121422065]
+position = Vector2(11284, 1205)
+rotation = -3.110144
+
+[node name="Moneda" parent="Monedas/MonedasPatronB2" unique_id=250991471 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronB2" unique_id=1479166107 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronB2" unique_id=279774311 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronB2" unique_id=42265643 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronB2" unique_id=119838237 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronB2" unique_id=1971806404 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronB2" unique_id=1543832025 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronB2" unique_id=1599989577 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronB2" unique_id=30884695 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronB2" unique_id=1980089575 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronB2" unique_id=2125787209 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronB2" unique_id=462950669 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronB2" unique_id=944360996 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronB2" unique_id=492543680 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronC2" type="Node2D" parent="Monedas" unique_id=1333160516]
+position = Vector2(11358, 966)
+rotation = -3.110144
+
+[node name="Moneda" parent="Monedas/MonedasPatronC2" unique_id=1340540015 instance=ExtResource("16_7w53l")]
+position = Vector2(-365.184, 508.73425)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronC2" unique_id=649805337 instance=ExtResource("16_7w53l")]
+position = Vector2(258.97684, 345.02744)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronC2" unique_id=1788318906 instance=ExtResource("16_7w53l")]
+position = Vector2(-208.32446, 501.79858)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronC2" unique_id=1667997294 instance=ExtResource("16_7w53l")]
+position = Vector2(-479.51007, 627.3877)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronC2" unique_id=1011740869 instance=ExtResource("16_7w53l")]
+position = Vector2(-647.5526, 628.6722)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronC2" unique_id=1253379257 instance=ExtResource("16_7w53l")]
+position = Vector2(-767.4931, 632.4454)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronC2" unique_id=1242684797 instance=ExtResource("16_7w53l")]
+position = Vector2(-882.69415, 150.8296)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronC2" unique_id=876782224 instance=ExtResource("16_7w53l")]
+position = Vector2(-1011.6616, 153.88632)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronC2" unique_id=1480360290 instance=ExtResource("16_7w53l")]
+position = Vector2(-1924.9714, 126.59039)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronC2" unique_id=463469449 instance=ExtResource("16_7w53l")]
+position = Vector2(-1622.951, 631.34344)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronC2" unique_id=127419454 instance=ExtResource("16_7w53l")]
+position = Vector2(-1161.6504, 156.60379)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronC2" unique_id=548285716 instance=ExtResource("16_7w53l")]
+position = Vector2(-49.371857, 497.79858)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronC2" unique_id=1867191529 instance=ExtResource("16_7w53l")]
+position = Vector2(98.37092, 360.08493)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronC2" unique_id=1445885895 instance=ExtResource("16_7w53l")]
+position = Vector2(440.07593, 345.33325)
+
+[node name="MonedasPatronA3" type="Node2D" parent="Monedas" unique_id=360982605]
+position = Vector2(16217.999, 797)
+rotation = 3.1105118
+
+[node name="Moneda" parent="Monedas/MonedasPatronA3" unique_id=282725354 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronA3" unique_id=233702608 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronA3" unique_id=548337139 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronA3" unique_id=490867398 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronA3" unique_id=2024008593 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronA3" unique_id=315837924 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronA3" unique_id=493450832 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronA3" unique_id=1293725664 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronA3" unique_id=460965446 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronA3" unique_id=2136937217 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronA3" unique_id=1560089420 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronA3" unique_id=1935303082 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronA3" unique_id=1874106834 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronA3" unique_id=780531688 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronB3" type="Node2D" parent="Monedas" unique_id=1539728464]
+position = Vector2(18869, -29.999878)
+rotation = 0.012253588
+
+[node name="Moneda" parent="Monedas/MonedasPatronB3" unique_id=1207563976 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronB3" unique_id=103898974 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronB3" unique_id=155032626 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronB3" unique_id=734063367 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronB3" unique_id=2007493424 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronB3" unique_id=1847077705 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronB3" unique_id=814146075 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronB3" unique_id=862407520 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronB3" unique_id=821519654 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronB3" unique_id=1232802001 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronB3" unique_id=370282724 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronB3" unique_id=116701677 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronB3" unique_id=1317423180 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronB3" unique_id=1171806075 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronC3" type="Node2D" parent="Monedas" unique_id=1651507214]
+position = Vector2(18221, 11)
+rotation = 0.012253588
+
+[node name="Moneda" parent="Monedas/MonedasPatronC3" unique_id=975516838 instance=ExtResource("16_7w53l")]
+position = Vector2(-365.184, 508.73425)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronC3" unique_id=191276501 instance=ExtResource("16_7w53l")]
+position = Vector2(258.97684, 345.02744)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronC3" unique_id=1010641425 instance=ExtResource("16_7w53l")]
+position = Vector2(-208.32446, 501.79858)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronC3" unique_id=1483042334 instance=ExtResource("16_7w53l")]
+position = Vector2(-479.51007, 627.3877)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronC3" unique_id=1141057959 instance=ExtResource("16_7w53l")]
+position = Vector2(-647.5526, 628.6722)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronC3" unique_id=1396036691 instance=ExtResource("16_7w53l")]
+position = Vector2(-767.4931, 632.4454)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronC3" unique_id=1017543051 instance=ExtResource("16_7w53l")]
+position = Vector2(-882.69415, 150.8296)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronC3" unique_id=1374648279 instance=ExtResource("16_7w53l")]
+position = Vector2(-1011.6616, 153.88632)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronC3" unique_id=385379615 instance=ExtResource("16_7w53l")]
+position = Vector2(-1924.9714, 126.59039)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronC3" unique_id=865500420 instance=ExtResource("16_7w53l")]
+position = Vector2(-1622.951, 631.34344)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronC3" unique_id=467741848 instance=ExtResource("16_7w53l")]
+position = Vector2(-1161.6504, 156.60379)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronC3" unique_id=705829289 instance=ExtResource("16_7w53l")]
+position = Vector2(-49.371857, 497.79858)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronC3" unique_id=1971856172 instance=ExtResource("16_7w53l")]
+position = Vector2(98.37092, 360.08493)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronC3" unique_id=695787961 instance=ExtResource("16_7w53l")]
+position = Vector2(440.07593, 345.33325)
+
+[node name="MonedasPatronA4" type="Node2D" parent="Monedas" unique_id=1880753554]
+position = Vector2(23342, 939)
+rotation = 3.1223974
+
+[node name="Moneda" parent="Monedas/MonedasPatronA4" unique_id=539455397 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronA4" unique_id=76596168 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronA4" unique_id=1054767215 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronA4" unique_id=828577123 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronA4" unique_id=1553751815 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronA4" unique_id=501386163 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronA4" unique_id=1185674108 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronA4" unique_id=1299029795 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronA4" unique_id=1715903947 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronA4" unique_id=1895603526 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronA4" unique_id=1023218101 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronA4" unique_id=486025022 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronA4" unique_id=2098623305 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronA4" unique_id=1306292010 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronB4" type="Node2D" parent="Monedas" unique_id=378554134]
+position = Vector2(21301, -44.999878)
+rotation = 0.012253588
+
+[node name="Moneda" parent="Monedas/MonedasPatronB4" unique_id=1479634117 instance=ExtResource("16_7w53l")]
+position = Vector2(1193, 259)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronB4" unique_id=1068053310 instance=ExtResource("16_7w53l")]
+position = Vector2(1277, 306)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronB4" unique_id=484352061 instance=ExtResource("16_7w53l")]
+position = Vector2(1335.0001, 386)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronB4" unique_id=616270379 instance=ExtResource("16_7w53l")]
+position = Vector2(1381, 472)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronB4" unique_id=1975757648 instance=ExtResource("16_7w53l")]
+position = Vector2(1425, 548)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronB4" unique_id=2051472676 instance=ExtResource("16_7w53l")]
+position = Vector2(1477, 626)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronB4" unique_id=387538593 instance=ExtResource("16_7w53l")]
+position = Vector2(1576.0001, 686)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronB4" unique_id=788498523 instance=ExtResource("16_7w53l")]
+position = Vector2(1680, 683)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronB4" unique_id=52644575 instance=ExtResource("16_7w53l")]
+position = Vector2(1774, 610)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronB4" unique_id=1659032095 instance=ExtResource("16_7w53l")]
+position = Vector2(1847.0001, 532)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronB4" unique_id=1821641408 instance=ExtResource("16_7w53l")]
+position = Vector2(1913.0001, 444)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronB4" unique_id=991944466 instance=ExtResource("16_7w53l")]
+position = Vector2(1975.0001, 364)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronB4" unique_id=1509735806 instance=ExtResource("16_7w53l")]
+position = Vector2(2025.0001, 292)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronB4" unique_id=615764460 instance=ExtResource("16_7w53l")]
+position = Vector2(2110, 239)
+
+[node name="MonedasPatronC4" type="Node2D" parent="Monedas" unique_id=36050219]
+position = Vector2(26108.002, 405.00012)
+rotation = 0.012253588
+
+[node name="Moneda" parent="Monedas/MonedasPatronC4" unique_id=1663558257 instance=ExtResource("16_7w53l")]
+position = Vector2(-365.184, 508.73425)
+
+[node name="Moneda2" parent="Monedas/MonedasPatronC4" unique_id=14308147 instance=ExtResource("16_7w53l")]
+position = Vector2(258.97684, 345.02744)
+
+[node name="Moneda3" parent="Monedas/MonedasPatronC4" unique_id=1518532434 instance=ExtResource("16_7w53l")]
+position = Vector2(-208.32446, 501.79858)
+
+[node name="Moneda4" parent="Monedas/MonedasPatronC4" unique_id=1767688247 instance=ExtResource("16_7w53l")]
+position = Vector2(-479.51007, 627.3877)
+
+[node name="Moneda5" parent="Monedas/MonedasPatronC4" unique_id=1012129640 instance=ExtResource("16_7w53l")]
+position = Vector2(-647.5526, 628.6722)
+
+[node name="Moneda6" parent="Monedas/MonedasPatronC4" unique_id=102577711 instance=ExtResource("16_7w53l")]
+position = Vector2(-767.4931, 632.4454)
+
+[node name="Moneda7" parent="Monedas/MonedasPatronC4" unique_id=894885985 instance=ExtResource("16_7w53l")]
+position = Vector2(-882.69415, 150.8296)
+
+[node name="Moneda8" parent="Monedas/MonedasPatronC4" unique_id=921156793 instance=ExtResource("16_7w53l")]
+position = Vector2(-1011.6616, 153.88632)
+
+[node name="Moneda9" parent="Monedas/MonedasPatronC4" unique_id=1101972882 instance=ExtResource("16_7w53l")]
+position = Vector2(-1924.9714, 126.59039)
+
+[node name="Moneda10" parent="Monedas/MonedasPatronC4" unique_id=931697681 instance=ExtResource("16_7w53l")]
+position = Vector2(-1622.951, 631.34344)
+
+[node name="Moneda11" parent="Monedas/MonedasPatronC4" unique_id=250829711 instance=ExtResource("16_7w53l")]
+position = Vector2(-1161.6504, 156.60379)
+
+[node name="Moneda12" parent="Monedas/MonedasPatronC4" unique_id=1050831739 instance=ExtResource("16_7w53l")]
+position = Vector2(-49.371857, 497.79858)
+
+[node name="Moneda13" parent="Monedas/MonedasPatronC4" unique_id=845867899 instance=ExtResource("16_7w53l")]
+position = Vector2(98.37092, 360.08493)
+
+[node name="Moneda14" parent="Monedas/MonedasPatronC4" unique_id=1520105602 instance=ExtResource("16_7w53l")]
+position = Vector2(440.07593, 345.33325)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1727151134]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1479750892]
+position = Vector2(18707.25, 1449)
+shape = SubResource("RectangleShape2D_det5f")
+disabled = true
+
+[node name="Transition" parent="." unique_id=134153046 instance=ExtResource("18_udiur")]
+
+[connection signal="area_entered" from="Personaje" to="." method="_on_personaje_area_entered"]
