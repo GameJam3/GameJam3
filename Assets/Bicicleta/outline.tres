@@ -6,4 +6,4 @@
 shader = ExtResource("1_kaioh")
 shader_parameter/glow_color = Color(0, 0.64705884, 0, 1)
 shader_parameter/glow_thickness = 2.000000095
-shader_parameter/intensity = 1.5
+shader_parameter/intensity = 0.70000003325

@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cc845us12pr1u" path="res://Assets/Bicicleta/bg.png" id="4_dveff"]
 [ext_resource type="Shader" uid="uid://ceweoaxqk75c8" path="res://Escenas/Bicicleta/rainbow_border.gdshader" id="5_43orh"]
 [ext_resource type="PackedScene" uid="uid://ofl14n0xxerc" path="res://Escenas/Transition.tscn" id="6_ynon8"]
+[ext_resource type="AudioStream" uid="uid://dc1aluk1jgk3q" path="res://Assets/Run/good.ogg" id="7_h7v1x"]
+[ext_resource type="AudioStream" uid="uid://ci54kvg6wbj6m" path="res://Assets/drumroll.mp3" id="8_srhs2"]
+[ext_resource type="AudioStream" uid="uid://bj3u0ianvxi73" path="res://Assets/Bicicleta/crash.mp3" id="9_7nrje"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_18o8o"]
 font = ExtResource("3_43orh")
@@ -107,7 +110,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.8333333, 1.0666667, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(960, 761), Vector2(960, 815.625), Vector2(960, 815.625), Vector2(960, -2000)]
+"values": [Vector2(960, 761), Vector2(960, 815), Vector2(960, 815), Vector2(960, -2000)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_srhs2"]
@@ -119,8 +122,8 @@ _data = {
 
 [node name="Node2D" type="Node2D" unique_id=16198870]
 script = ExtResource("1_18o8o")
-metadata/_edit_horizontal_guides_ = [-462.0]
-metadata/_edit_vertical_guides_ = [960.0, 1201.0]
+metadata/_edit_horizontal_guides_ = [-462.0, 134.0]
+metadata/_edit_vertical_guides_ = [958.0, 1201.0]
 
 [node name="player" parent="." unique_id=633465506 instance=ExtResource("2_6at3b")]
 z_index = -2
@@ -149,11 +152,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="rank" type="Label" parent="." unique_id=1448710308]
-z_index = 1
+z_index = 21
 offset_left = 678.0
-offset_top = 178.0
+offset_top = 241.0
 offset_right = 1246.0
-offset_bottom = 435.0
+offset_bottom = 498.0
 label_settings = SubResource("LabelSettings_l5n52")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -181,7 +184,7 @@ shape = SubResource("RectangleShape2D_1xurm")
 wait_time = 0.5
 
 [node name="tiempo_general" type="Timer" parent="." unique_id=245273297]
-wait_time = 20.0
+wait_time = 40.0
 one_shot = true
 autostart = true
 
@@ -237,6 +240,21 @@ z_index = 20
 
 [node name="player_anim" type="AnimationPlayer" parent="." unique_id=47408598]
 libraries/ = SubResource("AnimationLibrary_srhs2")
+
+[node name="ranksfx" type="AudioStreamPlayer" parent="." unique_id=349519738]
+stream = ExtResource("7_h7v1x")
+
+[node name="drumroll" type="AudioStreamPlayer" parent="." unique_id=1786402067]
+stream = ExtResource("8_srhs2")
+volume_db = -10.0
+
+[node name="ccallsfx" type="AudioStreamPlayer" parent="." unique_id=1341166413]
+stream = ExtResource("7_h7v1x")
+volume_db = -5.0
+
+[node name="crashsfx" type="AudioStreamPlayer" parent="." unique_id=206824793]
+stream = ExtResource("9_7nrje")
+volume_db = -5.0
 
 [connection signal="timeout" from="obstacle_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="tiempo_general" to="." method="_on_tiempo_general_timeout"]
