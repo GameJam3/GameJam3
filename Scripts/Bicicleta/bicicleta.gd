@@ -238,4 +238,6 @@ func end_match() -> void:
 	play.visible = true
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://Escenas/Nadar/Nado.tscn")
+	transition.z_index = 30
+	transition.call_deferred("play_anim", "Fade_Out")
+	transition.call_deferred("cambio_escena", "res://Escenas/Nadar/Nado.tscn")
